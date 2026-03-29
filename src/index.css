@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Perandory-Condensed";
+  src: url("./assets/fonts/Perandory-Condensed.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* @font-face {
+  font-family: "Helix-Regular";
+  src: url("./assets/fonts/helix-regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+} */
+
+@font-face {
+  font-family: "PlacardNextRegular-Condensed";
+  src: url("./assets/fonts/PlacardNextRegular.TTF") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* * {
+  border: 1px red solid;
+} */

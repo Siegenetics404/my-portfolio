@@ -2,7 +2,13 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        display: ["Perandory-Condensed", "sans-serif"],
+        body: ["PlacardNextRegular-Condensed", "sans-serif"],
+        // body: ["Helix-Regular", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };
