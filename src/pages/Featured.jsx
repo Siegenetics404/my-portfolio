@@ -1,5 +1,5 @@
 import React from 'react'
-import placeholder from '../assets/images/features/placeholder.png'
+import placeholder from '../assets/images/features/Placeholder.png'
 import me from '../assets/images/features/feature-me.jpg'
 import { FaArrowRight } from 'react-icons/fa6'
 import { motion } from 'framer-motion'
