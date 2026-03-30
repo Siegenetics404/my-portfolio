@@ -26,6 +26,37 @@
   font-display: swap;
 }
 
+.gradient-premium {
+  background: linear-gradient(
+    120deg,
+    #77530a,
+    #ffd277,
+    #fff3c4,
+    #ffd277,
+    #77530a
+  );
+  background-size: 250% 100%;
+  background-position: 0% 50%;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+
+  animation: premiumMove 6s ease-in-out infinite;
+}
+
+@keyframes premiumMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 /* * {
   border: 1px red solid;
 } */
