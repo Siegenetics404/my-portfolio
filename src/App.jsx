@@ -2,6 +2,7 @@ import React, { Component, Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
 import Header from './components/Header';
 import Featured from './pages/Featured';
+import AboutMe from './pages/AboutMe';
 
 // Lazy load Hero
 const Hero = lazy(() => import('./pages/Hero'));
@@ -37,6 +38,7 @@ export class App extends Component {
             <Hero />
           </Suspense>
           <Featured/>
+          <AboutMe/>
         </div>
       </>
     );
