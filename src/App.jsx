@@ -39,6 +39,7 @@ export class App extends Component {
           </Suspense>
           <Featured/>
           <AboutMe/>
+          <Featured/>
         </div>
       </>
     );
