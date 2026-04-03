@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import Header from './components/Header';
 import Featured from './pages/Featured';
 import AboutMe from './pages/AboutMe';
+import Footer from './components/Footer';
+import Services from './pages/Services';
 
 // Lazy load Hero
 const Hero = lazy(() => import('./pages/Hero'));
@@ -11,6 +13,7 @@ export class App extends Component {
   render() {
     return (
       <>
+        <Header />
         <div>
           <Suspense
             fallback={
@@ -33,13 +36,14 @@ export class App extends Component {
               </div>
             }
           >
-            <Header />
             <Hero />
-            <Featured />
-            <AboutMe />
-            <Featured />
+
           </Suspense>
         </div>
+        <Featured />
+        <AboutMe />
+        <Services/>
+        <Footer />
       </>
     );
   }

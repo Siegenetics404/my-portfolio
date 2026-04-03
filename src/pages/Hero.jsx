@@ -111,7 +111,7 @@ export default function Hero() {
                     <motion.div variants={stagger} className="flex justify-center space-x-4">
                         {socialLinks.map((social, idx) => (
                             <motion.div key={idx} variants={fadeUp} className="p-[2px] bg-[linear-gradient(to_right,#77530a,#ffd277,#77530a,#ffd277,#77530a)] bg-[length:250%] bg-left hover:bg-right transition-all duration-1000">
-                                <a href={social.href} className="w-10 h-10 flex items-center justify-center bg-black/90 text-white">
+                                <a href={social.href} target="_blank" className="w-10 h-10 flex items-center justify-center bg-black/90 text-white">
                                     {social.icon}
                                 </a>
                             </motion.div>

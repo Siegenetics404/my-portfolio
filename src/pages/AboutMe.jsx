@@ -162,7 +162,7 @@ export default function AboutMe() {
                         <div className="flex space-x-2 z-10">
                             {socialLinks.map((social, idx) => (
                                 <div key={idx} className={`p-[2px] ${borderGradient}`}>
-                                    <a href={social.href} className="w-10 h-10 flex items-center justify-center bg-black/90 text-white">
+                                    <a href={social.href} target="_blank" className="w-10 h-10 flex items-center justify-center bg-black/90 text-white">
                                         {social.icon}
                                     </a>
                                 </div>
