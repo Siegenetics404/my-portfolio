@@ -1,52 +1,105 @@
-import React, { Component, Suspense, lazy } from 'react';
-import { motion } from 'framer-motion';
-import Header from './components/Header';
-import Featured from './pages/Featured';
-import AboutMe from './pages/AboutMe';
-import Footer from './components/Footer';
-import Services from './pages/Services';
+import UserSidebar from "./components/layouts/UserSidebar";
+import { ArrowUpRight } from "lucide-react";
 
-// Lazy load Hero
-const Hero = lazy(() => import('./pages/Hero'));
-
-export class App extends Component {
-  render() {
-    return (
-      <>
-        <Header />
-        <div>
-          <Suspense
-            fallback={
-              <div className="min-h-screen flex items-center justify-center bg-[#0f0f0f]">
-                <div className="flex space-x-2">
-                  {[0, 1, 2].map((i) => (
-                    <motion.span
-                      key={i}
-                      className="w-4 h-2 bg-gradient-to-r from-[#77530a] via-[#ffd277] to-[#77530a]"
-                      animate={{ y: [0, -6, 0] }}
-                      transition={{
-                        duration: 0.6,
-                        repeat: Infinity,
-                        delay: i * 0.2,
-                        ease: "easeInOut",
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-            }
-          >
-            <Hero />
-
-          </Suspense>
-        </div>
-        <Featured />
-        <AboutMe />
-        <Services/>
-        <Footer />
-      </>
-    );
-  }
+// Inline icons — brand marks like GitHub/Instagram were dropped from
+// lucide-react's core set, so they're defined here instead of imported.
+function GithubIcon({ size = 18 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 .5C5.73.5.98 5.24.98 11.5c0 4.86 3.15 8.98 7.52 10.44.55.1.75-.24.75-.53 0-.26-.01-1.13-.02-2.05-3.06.67-3.71-1.3-3.71-1.3-.5-1.27-1.22-1.6-1.22-1.6-1-.68.08-.67.08-.67 1.1.08 1.68 1.13 1.68 1.13.98 1.68 2.58 1.2 3.21.91.1-.71.38-1.2.69-1.47-2.44-.28-5-1.22-5-5.43 0-1.2.43-2.18 1.13-2.95-.11-.28-.49-1.4.11-2.92 0 0 .92-.3 3.02 1.12a10.4 10.4 0 0 1 5.5 0c2.1-1.42 3.02-1.12 3.02-1.12.6 1.52.22 2.64.11 2.92.7.77 1.13 1.75 1.13 2.95 0 4.22-2.57 5.15-5.02 5.42.39.34.74 1.01.74 2.04 0 1.47-.01 2.66-.01 3.02 0 .29.2.64.76.53A10.52 10.52 0 0 0 23.02 11.5C23.02 5.24 18.27.5 12 .5Z" />
+    </svg>
+  );
 }
 
-export default App;
+function LinkedinIcon({ size = 18 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z" />
+    </svg>
+  );
+}
+
+function InstagramIcon({ size = 18 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function MailIcon({ size = 18 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3 7 9 6 9-6" />
+    </svg>
+  );
+}
+
+const SOCIALS = [
+  { icon: GithubIcon, label: "GitHub", href: "https://github.com/Siegenetics404" },
+  { icon: LinkedinIcon, label: "LinkedIn", href: "https://www.linkedin.com/in/cj-franco-758683237/" },
+  { icon: InstagramIcon, label: "Instagram", href: "https://www.instagram.com/si_jiiii/" },
+  {
+    icon: MailIcon,
+    label: "Email",
+    href: "https://mail.google.com/mail/?view=cm&fs=1&to=franco.cj03@gmail.com&su=Let's%20Work%20Together&body=Hi%20CJ,%20I%20would%20like%20to%20discuss%20a%20project..."
+  }
+];
+
+export default function UserHomepage() {
+  return (
+    <UserSidebar active="home">
+      <main className="flex-1 overflow-y-auto bg-white px-16 py-14">
+        <div className="flex items-center gap-8 max-w-2xl">
+          {/* Profile image — swap src for your own photo */}
+          <img
+            src="/images/profile.jpg"
+            alt="Cj Franco"
+            className="w-28 h-28 rounded-lg object-cover border border-neutral-200 shrink-0"
+          />
+
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
+              <h1 className="text-3xl font-semibold tracking-tight text-neutral-950">
+                Cj Franco
+              </h1>
+              {["Frontend", "Backend", "Automation", "SEO"].map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs text-neutral-500 border border-neutral-200 rounded-full px-3 py-1"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <p className="text-sm text-neutral-500 leading-relaxed">
+              I'm a web developer based in the Philippines, focused on building
+              clean, functional interfaces. I enjoy turning ideas into simple,
+              well-crafted products from front to back.
+            </p>
+
+            {/* Socials */}
+            <div className="flex items-center gap-5 pt-1">
+              {SOCIALS.map(({ icon: Icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 w-fit text-sm text-neutral-500 hover:text-neutral-950 transition-colors"
+                >
+                  <Icon size={16} />
+                  <span>{label}</span>
+                  <ArrowUpRight size={14} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </main>
+    </UserSidebar>
+  );
+}
