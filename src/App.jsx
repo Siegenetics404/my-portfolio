@@ -1,5 +1,12 @@
 import UserSidebar from "./components/layouts/UserSidebar";
+
 import { ArrowUpRight } from "lucide-react";
+import Stats from "./pages/Home/Stats";
+import Projects from "./pages/Home/Projects";
+import Experience from "./pages/Home/Experience";
+import TechStack from "./pages/Home/TechStack";
+import RecentProjects from "./pages/Home/RecentProject";
+
 
 // Inline icons — brand marks like GitHub/Instagram were dropped from
 // lucide-react's core set, so they're defined here instead of imported.
@@ -53,51 +60,65 @@ export default function UserHomepage() {
   return (
     <UserSidebar active="home">
       <main className="flex-1 overflow-y-auto bg-white px-16 py-14">
-        <div className="flex items-center gap-8 max-w-2xl">
-          {/* Profile image — swap src for your own photo */}
-          <img
-            src="/images/profile.jpg"
-            alt="Cj Franco"
-            className="w-28 h-28 rounded-lg object-cover border border-neutral-200 shrink-0"
-          />
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-16">
+          {/* Left: main content */}
+          <div>
+            <div className="flex items-center gap-8 max-w-2xl">
+              {/* Profile image — swap src for your own photo */}
+              <img
+                src="/images/profile.jpg"
+                alt="Cj Franco"
+                className="w-28 h-28 rounded-lg object-cover border border-neutral-200 shrink-0"
+              />
 
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-3xl font-semibold tracking-tight text-neutral-950">
-                Cj Franco
-              </h1>
-              {["Frontend", "Backend", "Automation", "SEO"].map((tag) => (
-                <span
-                  key={tag}
-                  className="text-xs text-neutral-500 border border-neutral-200 rounded-full px-3 py-1"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <p className="text-sm text-neutral-500 leading-relaxed">
-              I'm a web developer based in the Philippines, focused on building
-              clean, functional interfaces. I enjoy turning ideas into simple,
-              well-crafted products from front to back.
-            </p>
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-3 flex-wrap">
+                  <h1 className="text-3xl font-semibold tracking-tight text-neutral-950">
+                    Cj Franco
+                  </h1>
+                  {["Frontend", "Backend", "Automation", "SEO"].map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs text-neutral-500 border border-neutral-200 rounded-full px-3 py-1"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-sm text-neutral-500 leading-relaxed">
+                  I'm a web developer based in the Philippines, focused on building
+                  clean, functional interfaces. I enjoy turning ideas into simple,
+                  well-crafted products from front to back.
+                </p>
 
-            {/* Socials */}
-            <div className="flex items-center gap-5 pt-1">
-              {SOCIALS.map(({ icon: Icon, label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 w-fit text-sm text-neutral-500 hover:text-neutral-950 transition-colors"
-                >
-                  <Icon size={16} />
-                  <span>{label}</span>
-                  <ArrowUpRight size={14} />
-                </a>
-              ))}
+                {/* Socials */}
+                <div className="flex items-center gap-5 pt-1">
+                  {SOCIALS.map(({ icon: Icon, label, href }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 w-fit text-sm text-neutral-500 hover:text-neutral-950 transition-colors"
+                    >
+                      <Icon size={16} />
+                      <span>{label}</span>
+                      <ArrowUpRight size={14} />
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
+
+            {/* Stats */}
+            <Stats />
+            <Projects />
+            <Experience />
+            <TechStack />
           </div>
+
+          {/* Right: sticky aside */}
+          <RecentProjects />
         </div>
       </main>
     </UserSidebar>

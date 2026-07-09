@@ -1,5 +1,3 @@
-import React from "react";
-
 const NAV_ITEMS = [
     { id: "home", label: "Home" },
     { id: "work", label: "Work" },
@@ -13,7 +11,7 @@ const ROLE = "Web Developer — Philippines";
 
 export default function UserSidebar({ active, children }) {
     return (
-        <div className="min-h-screen w-full bg-white text-neutral-950 flex">
+        <div className="h-screen w-full bg-white text-neutral-950 flex overflow-hidden">
             {/* Sidebar */}
             <aside className="w-64 shrink-0 border-r border-neutral-200 px-8 py-10 flex flex-col justify-between">
                 <div>
@@ -28,8 +26,8 @@ export default function UserSidebar({ active, children }) {
                                         <a
                                             href={`#${item.id}`}
                                             className={`block px-3 py-2 text-sm transition-colors ${isActive
-                                                    ? "bg-neutral-950 text-white"
-                                                    : "text-neutral-500 hover:text-neutral-950"
+                                                ? "bg-neutral-950 text-white"
+                                                : "text-neutral-500 hover:text-neutral-950"
                                                 }`}
                                         >
                                             {item.label}
@@ -48,7 +46,7 @@ export default function UserSidebar({ active, children }) {
                 </div>
             </aside>
 
-            {/* Main content */}
+            {/* Main content — this is the ONLY scrolling container now */}
             <div className="flex flex-1 flex-col overflow-y-auto">{children}</div>
         </div>
     );

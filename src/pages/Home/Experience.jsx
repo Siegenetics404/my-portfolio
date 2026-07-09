@@ -1,0 +1,61 @@
+import { ArrowRight } from "lucide-react";
+
+const EXPERIENCE = [
+  {
+    period: "2025",
+    role: "Software Developer Intern",
+    company: "Provincial Government (ICTD)",
+  },
+  {
+    period: "2025 — 2026",
+    role: "Full Stack Web Developer",
+    company: "Choros.io",
+  },
+  {
+    period: "2022 — 2026",
+    role: "System Developer",
+    company: "Freelance",
+  },
+];
+
+export default function Experience() {
+  return (
+    <section className="mt-16 max-w-3xl">
+      {/* Section title */}
+      <div className="flex items-center justify-between border-b border-neutral-200 pb-4">
+        <h2 className="text-sm font-medium tracking-tight text-neutral-950">
+          <span className="font-mono text-neutral-400 mr-2">02 —</span>
+          Experience
+        </h2>
+
+        <a
+          href="/experience"
+          className="flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-950 transition-colors"
+        >
+          Full Story
+          <ArrowRight size={10} />
+        </a>
+      </div>
+
+      {/* Timeline list */}
+      <ul className="mt-8">
+        {EXPERIENCE.map((item, i) => (
+          <li
+            key={item.role + item.period}
+            className={`flex items-center justify-between py-5 ${
+              i !== EXPERIENCE.length - 1 ? "border-b border-neutral-100" : ""
+            }`}
+          >
+            <div>
+              <p className="text-sm font-medium text-neutral-950">{item.role}</p>
+              <p className="text-xs text-neutral-500 mt-0.5">{item.company}</p>
+            </div>
+            <span className="text-xs font-mono text-neutral-400 whitespace-nowrap">
+              {item.period}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
