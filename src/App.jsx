@@ -7,6 +7,7 @@ import Experience from "./pages/Home/Experience";
 import TechStack from "./pages/Home/TechStack";
 import Github from "./pages/Home/Github";
 import Testimonial from "./pages/Home/Testimonial";
+import ProfileImage from "./pages/Home/ProfileImage";
 
 // Inline icons — brand marks like GitHub/Instagram were dropped from
 // lucide-react's core set, so they're defined here instead of imported.
@@ -61,13 +62,9 @@ export default function UserHomepage() {
     <UserSidebar active="home">
       <main className="flex-1 overflow-y-auto bg-white px-16 py-14">
         <div className="max-w-3xl mx-auto">
-          <div className="flex items-center gap-8 max-w-2xl">
-            {/* Profile image — swap src for your own photo */}
-            <img
-              src="/images/profile.jpg"
-              alt="Cj Franco"
-              className="w-28 h-28 rounded-lg object-cover border border-neutral-200 shrink-0"
-            />
+          <div className="flex items-stretch gap-8 max-w-2xl">
+            {/* Profile image — mouse-trail hover reveal effect */}
+            <ProfileImage />
 
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-3 flex-wrap">
@@ -83,11 +80,21 @@ export default function UserHomepage() {
                   </span>
                 ))}
               </div>
-              <p className="text-sm text-neutral-500 leading-relaxed">
-                I'm a web developer based in the Philippines, focused on building
-                clean, functional interfaces. I enjoy turning ideas into simple,
-                well-crafted products from front to back.
-              </p>
+
+              <div className="flex flex-col gap-3">
+                <p className="text-sm text-neutral-500 leading-relaxed">
+                  I'm a web developer based in the Philippines, focused on building
+                  clean, functional interfaces. I enjoy turning ideas into simple,
+                  well-crafted products from front to back.
+                </p>
+                <p className="text-sm text-neutral-500 leading-relaxed">
+                  Over the past few years I've worked across startups, agencies,
+                  and freelance projects — building everything from marketing
+                  sites and SEO-driven landing pages to full-stack web
+                  applications. I care about clean code, thoughtful design, and
+                  shipping things that actually work.
+                </p>
+              </div>
 
               {/* Socials */}
               <div className="flex items-center gap-5 pt-1">
