@@ -6,6 +6,7 @@ import Projects from "./pages/Home/Projects";
 import Experience from "./pages/Home/Experience";
 import TechStack from "./pages/Home/TechStack";
 import Github from "./pages/Home/Github";
+import Testimonial from "./pages/Home/Testimonial";
 
 // Inline icons — brand marks like GitHub/Instagram were dropped from
 // lucide-react's core set, so they're defined here instead of imported.
@@ -112,6 +113,7 @@ export default function UserHomepage() {
           <Projects />
           <Experience />
           <TechStack />
+          <Testimonial />
           <Github />
         </div>
       </main>

@@ -6,7 +6,7 @@ export default function Github() {
             {/* Section title */}
             <div className="flex items-center justify-between border-b border-neutral-200 pb-4">
                 <h2 className="text-sm font-medium tracking-tight text-neutral-950">
-                    <span className="font-mono text-neutral-400 mr-2">04 —</span>
+                    <span className="font-mono text-neutral-400 mr-2">05 —</span>
                     GitHub
                 </h2>
 
