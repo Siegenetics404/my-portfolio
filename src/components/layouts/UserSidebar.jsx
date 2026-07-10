@@ -1,3 +1,5 @@
+import React from "react";
+
 const NAV_ITEMS = [
     { id: "home", label: "Home" },
     { id: "work", label: "Work" },
