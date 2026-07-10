@@ -1,6 +1,9 @@
-import { ArrowRight, Quote } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Quote, X } from "lucide-react";
 import ethanAvatar from "../../assets/images/reference/Ethan.webp";
 import tomAvatar from "../../assets/images/reference/Tom.webp";
+import ethanVideo from "../../assets/videos/Ethan-Testimonial.webm";
+import tomVideo from "../../assets/videos/Tom-Testimonial.webm";
 
 const TESTIMONIALS = [
     {
@@ -9,6 +12,7 @@ const TESTIMONIALS = [
         name: "Ethan Boland-White",
         title: "Co-founder of Choros.io & Shepton Judo Club Owner",
         avatar: ethanAvatar,
+        video: ethanVideo,
     },
     {
         quote:
@@ -16,10 +20,13 @@ const TESTIMONIALS = [
         name: "Tomas Tovey",
         title: "Founder of Choros.io & Entrepreneur",
         avatar: tomAvatar,
+        video: tomVideo,
     },
 ];
 
 export default function Testimonial() {
+    const [activeVideo, setActiveVideo] = useState(null);
+
     return (
         <section className="mt-16 max-w-3xl">
             {/* Section title */}
@@ -41,9 +48,11 @@ export default function Testimonial() {
             {/* Testimonial cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
                 {TESTIMONIALS.map((t) => (
-                    <div
+                    <button
                         key={t.name}
-                        className="relative flex flex-col justify-between border border-neutral-200 rounded-lg p-5 overflow-hidden"
+                        type="button"
+                        onClick={() => setActiveVideo(t)}
+                        className="relative flex flex-col justify-between border border-neutral-200 rounded-lg p-5 overflow-hidden text-left hover:border-neutral-950 transition-colors"
                     >
                         <Quote
                             size={64}
@@ -67,9 +76,40 @@ export default function Testimonial() {
                                 <p className="text-xs text-neutral-400 mt-0.5">{t.title}</p>
                             </div>
                         </div>
-                    </div>
+                    </button>
                 ))}
             </div>
+
+            {/* Video modal */}
+            {activeVideo && (
+                <div
+                    className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-6"
+                    onClick={() => setActiveVideo(null)}
+                >
+                    <div
+                        className="relative inline-block"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            onClick={() => setActiveVideo(null)}
+                            aria-label="Close video"
+                            className="absolute -top-10 right-0 text-white/70 hover:text-white transition-colors"
+                        >
+                            <X size={22} />
+                        </button>
+
+                        <video
+                            key={activeVideo.video}
+                            src={activeVideo.video}
+                            controls
+                            autoPlay
+                            className="block max-w-[90vw] max-h-[80vh] w-auto h-auto rounded-lg bg-black"
+                        />
+
+                        <p className="text-white/70 text-xs mt-3">{activeVideo.name}</p>
+                    </div>
+                </div>
+            )}
         </section>
     );
 }
