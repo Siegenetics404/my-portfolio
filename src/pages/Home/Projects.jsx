@@ -131,9 +131,9 @@ export default function Projects() {
       : PROJECTS.filter((project) => project.categories.includes(activeFilter));
 
   return (
-    <section className="mt-16 max-w-3xl relative">
+    <section className="mt-12 sm:mt-16 max-w-3xl relative">
       {/* Section title */}
-      <div className="flex items-center justify-between border-b border-neutral-200 pb-4">
+      <div className="flex items-center justify-between flex-wrap gap-2 border-b border-neutral-200 pb-4">
         <h2 className="text-sm font-medium tracking-tight text-neutral-950">
           <span className="font-mono text-neutral-400 mr-2">01 —</span>
           Featured Projects
@@ -169,7 +169,7 @@ export default function Projects() {
       </div>
 
       {/* Featured project cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
         {filteredProjects.map((project) => {
           const status = STATUS_STYLES[project.status];
           const isOngoing = project.status === "ongoing";
@@ -182,7 +182,7 @@ export default function Projects() {
             <CardTag
               key={project.name}
               {...cardProps}
-              className="group relative flex flex-col justify-between border border-neutral-200 rounded-lg p-5 text-left hover:border-neutral-950 transition-colors"
+              className="group relative flex flex-col justify-between border border-neutral-200 rounded-lg p-4 sm:p-5 text-left hover:border-neutral-950 transition-colors"
             >
               {/* Floating tooltip — only for pending projects, doesn't affect layout */}
               {project.status === "pending" && (
@@ -192,20 +192,20 @@ export default function Projects() {
               )}
 
               <div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
                     <img
                       src={project.logo}
                       alt={`${project.name} logo`}
-                      className="w-6 h-6 rounded-md object-cover border border-neutral-200"
+                      className="w-6 h-6 rounded-md object-cover border border-neutral-200 shrink-0"
                     />
-                    <h3 className="text-sm font-medium text-neutral-950">
+                    <h3 className="text-sm font-medium text-neutral-950 truncate">
                       {project.name}
                     </h3>
                   </div>
 
                   <span
-                    className={`flex items-center gap-1 text-[10px] font-medium border rounded-full px-2 py-0.5 whitespace-nowrap ${status.className}`}
+                    className={`flex items-center gap-1 text-[10px] font-medium border rounded-full px-2 py-0.5 whitespace-nowrap shrink-0 ${status.className}`}
                   >
                     <span className={`w-1.5 h-1.5 rounded-full ${status.dot}`} />
                     {status.label}
@@ -222,7 +222,7 @@ export default function Projects() {
 
       {/* Toast — shown when an ongoing project card is clicked */}
       <div
-        className={`fixed bottom-6 left-1/2 -translate-x-1/2 bg-neutral-950 text-white text-sm px-4 py-2.5 rounded-lg shadow-lg transition-all duration-300 z-50 ${toastVisible
+        className={`fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] sm:w-auto max-w-xs text-center bg-neutral-950 text-white text-sm px-4 py-2.5 rounded-lg shadow-lg transition-all duration-300 z-50 ${toastVisible
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-2 pointer-events-none"
           }`}

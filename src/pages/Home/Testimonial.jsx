@@ -8,20 +8,21 @@ import tomVideo from "../../assets/videos/Tom-Testimonial.webm";
 const TESTIMONIALS = [
     {
         quote:
-            "CJ Franco was fantastic to work with over nearly a year of collaboration. He contributed to websites, SEO, landing pages, and complex web applications, consistently delivering high-quality work on time. He was reliable, professional, and always met deadlines. I would gladly work with him again and highly recommend him to any tech startup or company looking for a skilled and dependable developer.",
-        name: "Ethan Boland-White",
-        title: "Co-founder of Choros.io & Shepton Judo Club Owner",
-        avatar: ethanAvatar,
-        video: ethanVideo,
-    },
-    {
-        quote:
             "CJ is a fantastic communicator and an exceptionally skilled developer. Throughout his time at Choros.io, he consistently delivered high-quality work, completing projects on or ahead of schedule. His ability to collaborate with the team was phenomenal, making him a reliable and valued contributor. CJ designed custom, high-performing websites for our marketing clients, with a strong focus on SEO and delivering measurable results. His professionalism, technical expertise, and dedication made a significant impact on our projects.",
         name: "Tomas Tovey",
         title: "Founder of Choros.io & Entrepreneur",
         avatar: tomAvatar,
         video: tomVideo,
     },
+    {
+        quote:
+            "CJ Franco was fantastic to work with over nearly a year of collaboration. He contributed to websites, SEO, landing pages, and complex web applications, consistently delivering high-quality work on time. He was reliable, professional, and always met deadlines. I would gladly work with him again and highly recommend him to any tech startup or company looking for a skilled and dependable developer.",
+        name: "Ethan Boland-White",
+        title: "Co-founder of Choros.io & Shepton Judo Club Owner",
+        avatar: ethanAvatar,
+        video: ethanVideo,
+    },
+
 ];
 
 export default function Testimonial() {

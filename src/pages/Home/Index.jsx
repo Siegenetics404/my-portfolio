@@ -60,15 +60,15 @@ const SOCIALS = [
 export default function Home() {
     return (
         <UserSidebar active="home">
-            <main className="flex-1 overflow-y-auto bg-white px-16 py-14">
+            <main className="flex-1 overflow-y-auto bg-white px-5 py-8 sm:px-10 sm:py-10 md:px-16 md:py-14">
                 <div className="max-w-3xl mx-auto">
-                    <div className="flex items-stretch gap-8 max-w-2xl">
+                    <div className="flex flex-col md:flex-row md:items-stretch gap-6 md:gap-8 w-full md:max-w-2xl">
                         {/* Profile image — mouse-trail hover reveal effect */}
                         <ProfileImage />
 
-                        <div className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-3 min-w-0">
                             <div className="flex items-center gap-3 flex-wrap">
-                                <h1 className="text-3xl font-semibold tracking-tight text-neutral-950">
+                                <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-950">
                                     Cj Franco
                                 </h1>
                                 {["Frontend", "Backend", "Automation", "SEO"].map((tag) => (
@@ -97,7 +97,7 @@ export default function Home() {
                             </div>
 
                             {/* Socials */}
-                            <div className="flex items-center gap-5 pt-1">
+                            <div className="flex items-center gap-4 sm:gap-5 flex-wrap pt-1">
                                 {SOCIALS.map(({ icon: Icon, label, href }) => (
                                     <a
                                         key={label}
