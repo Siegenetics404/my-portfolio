@@ -10,6 +10,8 @@ import morphic from "../../assets/images/projects/morphic.png";
 import ycom from "../../assets/images/projects/ycom.png";
 import shepton from "../../assets/images/projects/shepton.png";
 
+const FILTERS = ["All", "Collaboration", "Solo", "Personal", "Industry", "AI-Integrated"];
+
 const PROJECTS = [
   {
     name: "Choros.io",
@@ -18,6 +20,7 @@ const PROJECTS = [
       "A platform built to streamline workflows with clean, data-driven interfaces.",
     href: "https://choros.io",
     status: "active",
+    categories: ["AI-Integrated", "Collaboration"],
   },
   {
     name: "Daver & Daver",
@@ -26,6 +29,7 @@ const PROJECTS = [
       "A business site focused on clear presentation and a fast, reliable user experience.",
     href: "https://legal-app.choros.io/",
     status: "pending",
+    categories: ["AI-Integrated", "Collaboration"],
   },
   {
     name: "Project Pulse",
@@ -34,6 +38,7 @@ const PROJECTS = [
       "A tool for tracking progress and surfacing insights in real time.",
     href: "https://projectpulse.laravel.cloud/",
     status: "pending",
+    categories: ["Collaboration", "Industry"],
   },
   {
     name: "HOCU",
@@ -42,6 +47,7 @@ const PROJECTS = [
       "A plumbing company site built for fast service booking and clear customer contact.",
     href: "https://hocu-main.choros.biz/",
     status: "active",
+    categories: ["Solo", "Industry"],
   },
   {
     name: "Wirral Kitchens & Interiors",
@@ -50,6 +56,7 @@ const PROJECTS = [
       "A luxury kitchen and interior design showcase highlighting premium craftsmanship and finishes.",
     href: "https://wirralkitcheninteriors.co.uk/",
     status: "active",
+    categories: ["Solo", "Industry"],
   },
   {
     name: "Nucleus",
@@ -58,6 +65,7 @@ const PROJECTS = [
       "A self-learning AI tool that adapts and personalizes based on how users interact with it.",
     href: "https://nucleus.ai",
     status: "ongoing",
+    categories: ["Personal", "AI-Integrated"],
   },
   {
     name: "Morphic",
@@ -66,6 +74,7 @@ const PROJECTS = [
       "An AI-powered image referencing tool for gathering and organizing visual inspiration.",
     href: "https://morphic.app",
     status: "ongoing",
+    categories: ["Personal", "AI-Integrated"],
   },
   {
     name: "YCOM",
@@ -74,6 +83,7 @@ const PROJECTS = [
       "A finance platform focused on forex insights, market data, and trading resources.",
     href: "https://ycom.laravel.cloud",
     status: "pending",
+    categories: ["Solo", "Industry"],
   },
   {
     name: "Shepton Judo Club",
@@ -82,6 +92,7 @@ const PROJECTS = [
       "A club site for Shepton Judo Club, currently in development.",
     href: "https://sheptonjudo.choros.io/",
     status: "active",
+    categories: ["Solo", "Industry"],
   },
 ];
 
@@ -105,6 +116,7 @@ const STATUS_STYLES = {
 
 export default function Projects() {
   const [toastVisible, setToastVisible] = useState(false);
+  const [activeFilter, setActiveFilter] = useState("All");
   const toastTimer = useRef(null);
 
   const showToast = () => {
@@ -113,13 +125,18 @@ export default function Projects() {
     toastTimer.current = setTimeout(() => setToastVisible(false), 2500);
   };
 
+  const filteredProjects =
+    activeFilter === "All"
+      ? PROJECTS
+      : PROJECTS.filter((project) => project.categories.includes(activeFilter));
+
   return (
     <section className="mt-16 max-w-3xl relative">
       {/* Section title */}
       <div className="flex items-center justify-between border-b border-neutral-200 pb-4">
         <h2 className="text-sm font-medium tracking-tight text-neutral-950">
           <span className="font-mono text-neutral-400 mr-2">01 —</span>
-          Projects
+          Featured Projects
         </h2>
 
         <a
@@ -131,9 +148,29 @@ export default function Projects() {
         </a>
       </div>
 
+      {/* Category filters */}
+      <div className="flex flex-wrap gap-2 mt-6">
+        {FILTERS.map((filter) => {
+          const isActive = filter === activeFilter;
+          return (
+            <button
+              key={filter}
+              type="button"
+              onClick={() => setActiveFilter(filter)}
+              className={`text-xs rounded-full px-3 py-1 border transition-colors ${isActive
+                ? "bg-neutral-950 text-white border-neutral-950"
+                : "text-neutral-500 border-neutral-200 hover:border-neutral-950 hover:text-neutral-950"
+                }`}
+            >
+              {filter}
+            </button>
+          );
+        })}
+      </div>
+
       {/* Featured project cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-        {PROJECTS.map((project) => {
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+        {filteredProjects.map((project) => {
           const status = STATUS_STYLES[project.status];
           const isOngoing = project.status === "ongoing";
           const CardTag = isOngoing ? "button" : "a";
@@ -186,8 +223,8 @@ export default function Projects() {
       {/* Toast — shown when an ongoing project card is clicked */}
       <div
         className={`fixed bottom-6 left-1/2 -translate-x-1/2 bg-neutral-950 text-white text-sm px-4 py-2.5 rounded-lg shadow-lg transition-all duration-300 z-50 ${toastVisible
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-2 pointer-events-none"
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-2 pointer-events-none"
           }`}
       >
         Under development
