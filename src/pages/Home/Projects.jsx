@@ -17,7 +17,7 @@ const PROJECTS = [
     name: "Choros.io",
     logo: choros,
     description:
-      "A platform built to streamline workflows with clean, data-driven interfaces.",
+      "An AI-powered website builder platform for small trade businesses, collaboratively built — contributed front-end pages and features.",
     href: "https://choros.io",
     status: "active",
     categories: ["AI-Integrated", "Collaboration"],
@@ -26,7 +26,7 @@ const PROJECTS = [
     name: "Daver & Daver",
     logo: daverDaver,
     description:
-      "A business site focused on clear presentation and a fast, reliable user experience.",
+      "An AI-powered legal document application for drafting, reviewing, and managing legal paperwork.",
     href: "https://legal-app.choros.io/",
     status: "pending",
     categories: ["AI-Integrated", "Collaboration"],
@@ -35,7 +35,7 @@ const PROJECTS = [
     name: "Project Pulse",
     logo: projectPulse,
     description:
-      "A tool for tracking progress and surfacing insights in real time.",
+      "A project management platform for development and marketing teams to plan, track, and stay in sync.",
     href: "https://projectpulse.laravel.cloud/",
     status: "pending",
     categories: ["Collaboration", "Industry"],
@@ -89,7 +89,7 @@ const PROJECTS = [
     name: "Shepton Judo Club",
     logo: shepton,
     description:
-      "A club site for Shepton Judo Club, currently in development.",
+      "A site for a UK judo club, built to showcase classes, schedules, and membership info for local members.",
     href: "https://sheptonjudo.choros.io/",
     status: "active",
     categories: ["Solo", "Industry"],
