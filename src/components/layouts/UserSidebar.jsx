@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Download } from "lucide-react";
+import { Download, Mail, Menu, X } from "lucide-react";
+import logo from "../../assets/images/about/profile-logo.png";
 import resumeFile from "../../assets/files/Cj Franco - Resume.pdf";
 
 const NAV_GROUPS = [
@@ -30,12 +31,53 @@ const NAME = "Cj Franco";
 const ROLE = "Web Developer — Philippines";
 
 export default function UserSidebar({ active, children }) {
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const closeMobile = () => setMobileOpen(false);
+
     return (
-        <div className="h-screen w-full bg-white text-neutral-950 flex overflow-hidden">
+        <div className="h-screen w-full bg-white text-neutral-950 flex flex-col md:flex-row overflow-hidden">
+            {/* Mobile top bar */}
+            <div className="md:hidden flex items-center justify-between px-4 py-3 border-b border-neutral-200 shrink-0 z-30 bg-white relative">
+                <Link to="/" onClick={closeMobile} className="flex items-center gap-2">
+                    <img src={logo} alt="Logo" className="w-7 h-7 rounded-md object-cover" />
+                    <span className="text-lg font-semibold tracking-tight">{NAME}</span>
+                </Link>
+                <button
+                    onClick={() => setMobileOpen((v) => !v)}
+                    aria-label={mobileOpen ? "Close menu" : "Open menu"}
+                    className="p-1 text-neutral-600 hover:text-neutral-950 transition-colors"
+                >
+                    {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+                </button>
+            </div>
+
+            {/* Backdrop — mobile only, closes drawer on click */}
+            {mobileOpen && (
+                <div
+                    className="fixed inset-0 bg-black/30 z-30 md:hidden"
+                    onClick={closeMobile}
+                />
+            )}
+
             {/* Sidebar */}
-            <aside className="w-64 shrink-0 border-r border-neutral-200 px-6 py-8 flex flex-col justify-between overflow-y-auto">
+            <aside
+                className={`fixed md:static inset-y-0 left-0 z-40 w-64 shrink-0 bg-white border-r border-neutral-200 px-6 py-8 flex flex-col justify-between overflow-y-auto transform transition-transform duration-300 ease-out ${mobileOpen ? "translate-x-0" : "-translate-x-full"
+                    } md:translate-x-0`}
+            >
                 <div>
-                    <span className="text-xl font-semibold tracking-tight px-2">{NAME}</span>
+                    {/* Logo — hidden on mobile since the top bar already shows it */}
+                    <Link
+                        to="/"
+                        onClick={closeMobile}
+                        className="hidden md:flex items-center gap-2 px-2 w-fit"
+                    >
+                        <img
+                            src={logo}
+                            alt="Logo"
+                            className="w-7 h-7 rounded-md object-cover"
+                        />
+                        <span className="text-xl font-semibold tracking-tight">{NAME}</span>
+                    </Link>
 
                     <div className="mt-8 flex flex-col gap-5">
                         {NAV_GROUPS.map((group) => (
@@ -54,6 +96,7 @@ export default function UserSidebar({ active, children }) {
                                             >
                                                 <Link
                                                     to={item.path}
+                                                    onClick={closeMobile}
                                                     className={`block px-2 py-1.5 text-sm rounded-md transition-colors ${isResume ? "pr-8" : ""} ${isActive
                                                         ? "bg-neutral-950 text-white"
                                                         : "text-neutral-500 hover:text-neutral-950"
@@ -88,6 +131,19 @@ export default function UserSidebar({ active, children }) {
                 <div className="border-t border-neutral-200 pt-3 px-2">
                     <p className="text-sm font-medium">{NAME}</p>
                     <p className="text-xs text-neutral-400">{ROLE}</p>
+
+                    <p className="text-xs text-neutral-400 mt-4 leading-relaxed">
+                        Open to full-time roles and freelance work — let's talk.
+                    </p>
+                    <a
+                        href="https://mail.google.com/mail/?view=cm&fs=1&to=franco.cj03@gmail.com&su=Let's%20Work%20Together&body=Hi%20CJ,%20I%20would%20like%20to%20discuss%20a%20project..."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 text-xs text-neutral-500 hover:text-neutral-950 transition-colors mt-1"
+                    >
+                        <Mail size={12} />
+                        franco.cj03@gmail.com
+                    </a>
                 </div>
             </aside>
 
