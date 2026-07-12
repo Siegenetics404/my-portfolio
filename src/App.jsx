@@ -4,26 +4,21 @@ import Projects from "./pages/Projects/Index";
 
 import Home from "./pages/Home/Index";
 import UnderDevelopment from "./components/UnderDevelopment";
+import Experience from "./pages/Experience/Index";
+import Tools from "./pages/Tools/Index";
+import Recommendations from "./pages/Recommendation/Index";
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/projects" element={<Projects />} />
+      <Route path="/experience" element={<Experience />} />
+      <Route path="/tools" element={<Tools />} />
+      <Route path="/recommendation" element={<Recommendations />} />
 
       {/* Pages not built yet — swap each for a real page as you build it */}
-      <Route
-        path="/experience"
-        element={<UnderDevelopment active="experience" title="Experience" />}
-      />
-      <Route
-        path="/tools"
-        element={<UnderDevelopment active="tools" title="Tools" />}
-      />
-      <Route
-        path="/recommendation"
-        element={<UnderDevelopment active="recommendation" title="Recommendation" />}
-      />
+
       <Route
         path="/shop"
         element={<UnderDevelopment active="shop" title="Shop" />}

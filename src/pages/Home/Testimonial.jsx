@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, Quote, X } from "lucide-react";
+import { ArrowRight, X } from "lucide-react";
 import ethanAvatar from "../../assets/images/reference/Ethan.webp";
 import tomAvatar from "../../assets/images/reference/Tom.webp";
 import ethanVideo from "../../assets/videos/Ethan-Testimonial.webm";
@@ -37,8 +37,8 @@ export default function Testimonial() {
                     Recommendations
                 </h2>
 
-                <a
-                    href="/testimonials"
+
+                <a href="/testimonials"
                     className="flex items-center gap-1 text-sm text-neutral-600 hover:text-neutral-950 transition-colors"
                 >
                     Full Testimonial
@@ -55,12 +55,15 @@ export default function Testimonial() {
                         onClick={() => setActiveVideo(t)}
                         className="relative flex flex-col justify-between border border-neutral-200 rounded-lg p-5 overflow-hidden text-left hover:border-neutral-950 transition-colors"
                     >
-                        <Quote
-                            size={64}
+                        <svg
+                            width="64"
+                            height="64"
+                            viewBox="0 0 24 24"
                             className="absolute -top-3 -right-2 text-orange-200/50"
                             fill="currentColor"
-                            strokeWidth={0}
-                        />
+                        >
+                            <path d="M9.5 8C7 8 5 10 5 12.5c0 2.2 1.6 4 3.7 4.4-.3 1.4-1.4 2.5-2.7 3.1v1.5c2.8-.5 5.5-2.6 5.5-6.5V13c0-2.8-1-5-2-5Zm9 0c-2.5 0-4.5 2-4.5 4.5 0 2.2 1.6 4 3.7 4.4-.3 1.4-1.4 2.5-2.7 3.1v1.5c2.8-.5 5.5-2.6 5.5-6.5V13c0-2.8-1-5-2-5Z" />
+                        </svg>
 
                         <p className="relative text-xs text-neutral-600 leading-relaxed">
                             {t.quote}
@@ -82,35 +85,37 @@ export default function Testimonial() {
             </div>
 
             {/* Video modal */}
-            {activeVideo && (
-                <div
-                    className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-6"
-                    onClick={() => setActiveVideo(null)}
-                >
+            {
+                activeVideo && (
                     <div
-                        className="relative inline-block"
-                        onClick={(e) => e.stopPropagation()}
+                        className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-6"
+                        onClick={() => setActiveVideo(null)}
                     >
-                        <button
-                            onClick={() => setActiveVideo(null)}
-                            aria-label="Close video"
-                            className="absolute -top-10 right-0 text-white/70 hover:text-white transition-colors"
+                        <div
+                            className="relative inline-block"
+                            onClick={(e) => e.stopPropagation()}
                         >
-                            <X size={22} />
-                        </button>
+                            <button
+                                onClick={() => setActiveVideo(null)}
+                                aria-label="Close video"
+                                className="absolute -top-10 right-0 text-white/70 hover:text-white transition-colors"
+                            >
+                                <X size={22} />
+                            </button>
 
-                        <video
-                            key={activeVideo.video}
-                            src={activeVideo.video}
-                            controls
-                            autoPlay
-                            className="block max-w-[90vw] max-h-[80vh] w-auto h-auto rounded-lg bg-black"
-                        />
+                            <video
+                                key={activeVideo.video}
+                                src={activeVideo.video}
+                                controls
+                                autoPlay
+                                className="block max-w-[90vw] max-h-[80vh] w-auto h-auto rounded-lg bg-black"
+                            />
 
-                        <p className="text-white/70 text-xs mt-3">{activeVideo.name}</p>
+                            <p className="text-white/70 text-xs mt-3">{activeVideo.name}</p>
+                        </div>
                     </div>
-                </div>
-            )}
-        </section>
+                )
+            }
+        </section >
     );
 }

@@ -49,8 +49,7 @@ export default function UserSidebar({ active, children }) {
 
                             if (isResume) {
                                 return (
-                                    <li key={item.id} className="group">
-
+                                    <li key={item.id} className="group relative">
                                         <a href={resumeFile}
                                             download="Cj Franco - Resume.pdf"
                                             onClick={closeMobile}
@@ -68,6 +67,11 @@ export default function UserSidebar({ active, children }) {
                                                     }`}
                                             />
                                         </a>
+
+                                        {/* Tooltip — lets users know clicking downloads the file */}
+                                        <span className="absolute left-1/2 -translate-x-1/4 bottom-full mb-2 whitespace-nowrap bg-neutral-950 text-white text-[10px] font-normal px-2 py-1 rounded-md opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all pointer-events-none z-10">
+                                            Click to download resume
+                                        </span>
                                     </li>
                                 );
                             }
