@@ -1,7 +1,7 @@
 import dotPattern from "../../assets/images/stats/black and white dot pattern.webp";
 
 const STATS = [
-    { value: "4+", label: "Years Experience" },
+    { value: "3+", label: "Years Experience" },
     { value: "20+", label: "Technologies Used" },
     { value: "100%", label: "Client Satisfaction" },
     { value: "30+", label: "Projects Completed" },

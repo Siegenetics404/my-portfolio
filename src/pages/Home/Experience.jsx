@@ -12,7 +12,7 @@ const EXPERIENCE = [
     company: "Choros.io",
   },
   {
-    period: "2022 — 2026",
+    period: "2023 — 2026",
     role: "System Developer",
     company: "Freelance",
   },
@@ -42,9 +42,8 @@ export default function Experience() {
         {EXPERIENCE.map((item, i) => (
           <li
             key={item.role + item.period}
-            className={`flex items-center justify-between py-5 ${
-              i !== EXPERIENCE.length - 1 ? "border-b border-neutral-100" : ""
-            }`}
+            className={`flex items-center justify-between py-5 ${i !== EXPERIENCE.length - 1 ? "border-b border-neutral-100" : ""
+              }`}
           >
             <div>
               <p className="text-sm font-medium text-neutral-950">{item.role}</p>
