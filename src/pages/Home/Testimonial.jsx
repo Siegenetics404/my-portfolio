@@ -39,7 +39,7 @@ export default function Testimonial() {
 
                 <a
                     href="/testimonials"
-                    className="flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-950 transition-colors"
+                    className="flex items-center gap-1 text-sm text-neutral-600 hover:text-neutral-950 transition-colors"
                 >
                     Full Testimonial
                     <ArrowRight size={10} />
@@ -62,7 +62,7 @@ export default function Testimonial() {
                             strokeWidth={0}
                         />
 
-                        <p className="relative text-xs text-neutral-500 leading-relaxed">
+                        <p className="relative text-xs text-neutral-600 leading-relaxed">
                             {t.quote}
                         </p>
 
@@ -74,7 +74,7 @@ export default function Testimonial() {
                             />
                             <div>
                                 <p className="text-sm font-medium text-neutral-950">{t.name}</p>
-                                <p className="text-xs text-neutral-400 mt-0.5">{t.title}</p>
+                                <p className="text-xs text-neutral-600 mt-0.5">{t.title}</p>
                             </div>
                         </div>
                     </button>

@@ -12,7 +12,7 @@ const EXPERIENCE = [
     company: "Choros.io",
   },
   {
-    period: "2023 — 2026",
+    period: "2022 — 2026",
     role: "System Developer",
     company: "Freelance",
   },
@@ -20,9 +20,9 @@ const EXPERIENCE = [
 
 export default function Experience() {
   return (
-    <section className="mt-16 max-w-3xl">
+    <section className="mt-12 sm:mt-16 max-w-3xl">
       {/* Section title */}
-      <div className="flex items-center justify-between border-b border-neutral-200 pb-4">
+      <div className="flex items-center justify-between flex-wrap gap-2 border-b border-neutral-200 pb-4">
         <h2 className="text-sm font-medium tracking-tight text-neutral-950">
           <span className="font-mono text-neutral-400 mr-2">02 —</span>
           Experience
@@ -30,7 +30,7 @@ export default function Experience() {
 
         <a
           href="/experience"
-          className="flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-950 transition-colors"
+          className="flex items-center gap-1 text-sm text-neutral-600 hover:text-neutral-950 transition-colors"
         >
           Full Story
           <ArrowRight size={10} />
@@ -38,18 +38,18 @@ export default function Experience() {
       </div>
 
       {/* Timeline list */}
-      <ul className="mt-8">
+      <ul className="mt-6 sm:mt-8">
         {EXPERIENCE.map((item, i) => (
           <li
             key={item.role + item.period}
-            className={`flex items-center justify-between py-5 ${i !== EXPERIENCE.length - 1 ? "border-b border-neutral-100" : ""
+            className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-0 py-4 sm:py-5 ${i !== EXPERIENCE.length - 1 ? "border-b border-neutral-100" : ""
               }`}
           >
             <div>
               <p className="text-sm font-medium text-neutral-950">{item.role}</p>
               <p className="text-xs text-neutral-500 mt-0.5">{item.company}</p>
             </div>
-            <span className="text-xs font-mono text-neutral-400 whitespace-nowrap">
+            <span className="text-xs font-mono text-neutral-500 whitespace-nowrap">
               {item.period}
             </span>
           </li>

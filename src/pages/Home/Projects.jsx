@@ -141,7 +141,7 @@ export default function Projects() {
 
         <a
           href="/projects"
-          className="flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-950 transition-colors"
+          className="flex items-center gap-1 text-sm text-neutral-600 hover:text-neutral-950 transition-colors"
         >
           Showcase Projects
           <ArrowRight size={10} />
@@ -159,7 +159,7 @@ export default function Projects() {
               onClick={() => setActiveFilter(filter)}
               className={`text-xs rounded-full px-3 py-1 border transition-colors ${isActive
                 ? "bg-neutral-950 text-white border-neutral-950"
-                : "text-neutral-500 border-neutral-200 hover:border-neutral-950 hover:text-neutral-950"
+                : "text-neutral-600 border-neutral-400 hover:border-neutral-950 hover:text-neutral-950"
                 }`}
             >
               {filter}
@@ -211,7 +211,7 @@ export default function Projects() {
                     {status.label}
                   </span>
                 </div>
-                <p className="text-xs text-neutral-500 leading-relaxed mt-2">
+                <p className="text-xs text-neutral-600 leading-relaxed mt-2">
                   {project.description}
                 </p>
               </div>

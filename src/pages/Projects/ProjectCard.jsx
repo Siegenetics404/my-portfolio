@@ -215,13 +215,13 @@ export default function ProjectCard() {
                                             {status.label}
 
                                             {isPending && (
-                                                <span className="absolute -top-5 right-0 whitespace-nowrap bg-neutral-950 text-white text-[10px] font-normal px-2 py-1 rounded-md opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all pointer-events-none z-10">
+                                                <span className="absolute -top-8 right-0 whitespace-nowrap bg-neutral-950 text-white text-[10px] font-normal px-2 py-1 rounded-md opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all pointer-events-none z-10">
                                                     Server on hold
                                                 </span>
                                             )}
                                         </span>
                                     </div>
-                                    <p className="text-xs text-neutral-500 leading-relaxed mt-2">
+                                    <p className="text-xs text-neutral-600 leading-relaxed mt-2">
                                         {project.description}
                                     </p>
                                 </div>

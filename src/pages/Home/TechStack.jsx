@@ -28,7 +28,7 @@ export default function TechStack() {
 
                 <a
                     href="/tech-stack"
-                    className="flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-950 transition-colors"
+                    className="flex items-center gap-1 text-sm text-neutral-600 hover:text-neutral-950 transition-colors"
                 >
                     View All
                     <ArrowRight size={10} />
@@ -40,7 +40,7 @@ export default function TechStack() {
                 {TECH_STACK.map((item) => (
                     <span
                         key={item}
-                        className="text-xs text-neutral-600 border border-neutral-200 rounded-full px-3 py-1 hover:border-neutral-950 hover:text-neutral-950 transition-colors"
+                        className="text-xs text-neutral-600 border border-neutral-400 rounded-full px-3 py-1 hover:border-neutral-950 hover:text-neutral-950 transition-colors"
                     >
                         {item}
                     </span>

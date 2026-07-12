@@ -18,7 +18,7 @@ const SIDE_PROJECTS = [
         title: "School Management System",
         image: school,
         description:
-            "A system for handling student records, attendance, and grades — built to simplify day-to-day admin work for small schools.",
+            "A system for handling student records, attendance, and grades. Built to simplify day-to-day admin work for small schools.",
     },
     {
         title: "Inventory Management System",
@@ -33,16 +33,16 @@ const SIDE_PROJECTS = [
             "A POS and online ordering setup for restaurants, covering menu management, order tracking, and simple daily sales reporting.",
     },
     {
-        title: "E-commerce — Single Product",
+        title: "E-commerce, Single Product",
         image: single,
         description:
             "A focused storefront built around one product, with variant selection, checkout flow, and a landing page designed to convert.",
     },
     {
-        title: "E-commerce — Multiple Products",
+        title: "E-commerce, Multiple Products",
         image: multi,
         description:
-            "A full storefront with product catalog, filtering, cart, and checkout — built to handle a growing range of products.",
+            "A full storefront with product catalog, filtering, cart, and checkout. Built to handle a growing range of products.",
     },
 ];
 
@@ -84,7 +84,7 @@ export default function SideProjects() {
                             <p className="text-sm font-medium text-neutral-950">
                                 {project.title}
                             </p>
-                            <p className="text-xs text-neutral-500 leading-relaxed mt-1.5">
+                            <p className="text-xs text-neutral-600 leading-relaxed mt-1.5">
                                 {project.description}
                             </p>
                         </div>

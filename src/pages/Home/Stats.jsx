@@ -21,7 +21,7 @@ export default function Stats() {
                     <span className="text-xl font-semibold tracking-tight text-neutral-950">
                         {stat.value}
                     </span>
-                    <span className="text-[11px] text-neutral-500 uppercase tracking-wide">
+                    <span className="text-[11px] text-neutral-600 uppercase tracking-wide">
                         {stat.label}
                     </span>
                 </div>

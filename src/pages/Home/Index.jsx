@@ -74,7 +74,7 @@ export default function Home() {
                                 {["Frontend", "Backend", "Automation", "SEO"].map((tag) => (
                                     <span
                                         key={tag}
-                                        className="text-xs text-neutral-500 border border-neutral-200 rounded-full px-3 py-1"
+                                        className="text-xs text-neutral-600 border border-neutral-400 rounded-full px-3 py-1"
                                     >
                                         {tag}
                                     </span>
@@ -82,17 +82,17 @@ export default function Home() {
                             </div>
 
                             <div className="flex flex-col gap-3">
-                                <p className="text-sm text-neutral-500 leading-relaxed">
+                                <p className="text-sm text-neutral-600 leading-relaxed">
                                     I'm a web developer based in the Philippines, focused on building
                                     clean, functional interfaces. I enjoy turning ideas into simple,
                                     well-crafted products from front to back.
                                 </p>
-                                <p className="text-sm text-neutral-500 leading-relaxed">
-                                    Over the past few years I've worked across startups, agencies,
-                                    and freelance projects — building everything from marketing
-                                    sites and SEO-driven landing pages to full-stack web
-                                    applications. I care about clean code, thoughtful design, and
-                                    shipping things that actually work.
+                                <p className="text-sm text-neutral-600 leading-relaxed">
+                                    Over the past few years I've gained experience through a
+                                    government internship, a startup, and freelance projects. I've
+                                    built everything from marketing sites and SEO-driven landing
+                                    pages to full-stack web applications, and I care about clean
+                                    code, thoughtful design, and shipping things that actually work.
                                 </p>
                             </div>
 
@@ -104,11 +104,11 @@ export default function Home() {
                                         href={href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="flex items-center gap-2 w-fit text-sm text-neutral-500 hover:text-neutral-950 transition-colors"
+                                        className="flex items-center gap-2 w-fit text-sm text-neutral-600 hover:text-neutral-950 transition-colors"
                                     >
                                         <Icon size={16} />
                                         <span>{label}</span>
-                                        <ArrowUpRight size={14} />
+                                        <ArrowUpRight size={12} />
                                     </a>
                                 ))}
                             </div>

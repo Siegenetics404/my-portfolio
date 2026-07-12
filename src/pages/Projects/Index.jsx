@@ -13,8 +13,8 @@ export default function Index() {
                         <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-950">
                             Projects
                         </h1>
-                        <p className="text-sm text-neutral-500 mt-2 leading-relaxed max-w-xl">
-                            Products I've built — client work, collaborations, and personal
+                        <p className="text-sm text-neutral-600 mt-2 leading-relaxed max-w-xl">
+                            Products I've built, client work, collaborations, and personal
                             experiments, spanning websites, tools, and AI-integrated products.
                         </p>
                     </div>

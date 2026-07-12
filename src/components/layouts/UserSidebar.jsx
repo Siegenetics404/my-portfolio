@@ -46,59 +46,72 @@ export default function UserSidebar({ active, children }) {
                         {group.items.map((item) => {
                             const isActive = item.id === active;
                             const isResume = item.id === "resume";
+
+                            if (isResume) {
+                                return (
+                                    <li key={item.id} className="group">
+
+                                        <a href={resumeFile}
+                                            download="Cj Franco - Resume.pdf"
+                                            onClick={closeMobile}
+                                            className={`flex items-center justify-between px-2 py-1.5 text-sm rounded-md transition-colors ${isActive
+                                                ? "bg-neutral-950 text-white"
+                                                : "text-neutral-600 hover:text-neutral-950"
+                                                }`}
+                                        >
+                                            {item.label}
+                                            <Download
+                                                size={14}
+                                                className={`opacity-0 group-hover:opacity-100 transition-opacity ${isActive
+                                                    ? "text-white/70"
+                                                    : "text-neutral-400 group-hover:text-neutral-950"
+                                                    }`}
+                                            />
+                                        </a>
+                                    </li>
+                                );
+                            }
+
                             return (
-                                <li key={item.id} className={isResume ? "group relative" : ""}>
+                                <li key={item.id}>
                                     <Link
                                         to={item.path}
                                         onClick={closeMobile}
-                                        className={`block px-2 py-1.5 text-sm rounded-md transition-colors ${isResume ? "pr-8" : ""} ${isActive
+                                        className={`block px-2 py-1.5 text-sm rounded-md transition-colors ${isActive
                                             ? "bg-neutral-950 text-white"
-                                            : "text-neutral-500 hover:text-neutral-950"
+                                            : "text-neutral-600 hover:text-neutral-950"
                                             }`}
                                     >
                                         {item.label}
                                     </Link>
-
-                                    {isResume && (
-                                        <a
-                                            href={resumeFile}
-                                            download="Cj Franco - Resume.pdf"
-                                            aria-label="Download resume"
-                                            className={`absolute right-1.5 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity ${isActive
-                                                ? "text-white/70 hover:text-white"
-                                                : "text-neutral-400 hover:text-neutral-950"
-                                                }`}
-                                        >
-                                            <Download size={14} />
-                                        </a>
-                                    )}
                                 </li>
                             );
                         })}
                     </ul>
                 </nav>
-            ))}
-        </div>
+            ))
+            }
+        </div >
     );
 
     const Footer = () => (
         <div className="border-t border-neutral-200 pt-3 px-2">
-            <p className="text-sm font-medium">{NAME}</p>
-            <p className="text-xs text-neutral-400">{ROLE}</p>
+            <p className="text-sm font-medium text-neutral-950">{NAME}</p>
+            <p className="text-xs text-neutral-500">{ROLE}</p>
 
-            <p className="text-xs text-neutral-400 mt-4 leading-relaxed">
-                Open to full-time roles and freelance work — let's talk.
+            <p className="text-xs text-neutral-500 mt-4 leading-relaxed">
+                Open to full-time roles and freelance work. Let's talk.
             </p>
-            <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=franco.cj03@gmail.com&su=Let's%20Work%20Together&body=Hi%20CJ,%20I%20would%20like%20to%20discuss%20a%20project..."
+
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=franco.cj03@gmail.com&su=Let's%20Work%20Together&body=Hi%20CJ,%20I%20would%20like%20to%20discuss%20a%20project..."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-xs text-neutral-500 hover:text-neutral-950 transition-colors mt-1"
+                className="flex items-center font-semibold gap-1.5 text-xs text-neutral-600 hover:text-neutral-950 transition-colors mt-1"
             >
                 <Mail size={12} />
                 franco.cj03@gmail.com
             </a>
-        </div>
+        </div >
     );
 
     return (

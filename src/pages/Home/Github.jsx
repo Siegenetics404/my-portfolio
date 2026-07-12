@@ -14,9 +14,9 @@ export default function Github() {
                     href="https://github.com/Siegenetics404"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-950 transition-colors"
+                    className="flex items-center gap-1 text-sm text-neutral-600 hover:text-neutral-950 transition-colors"
                 >
-                    @siegenetics404
+                    @Siegenetics404
                     <ArrowRight size={10} />
                 </a>
             </div>
