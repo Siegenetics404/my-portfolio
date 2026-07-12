@@ -143,7 +143,7 @@ export default function Projects() {
           href="/projects"
           className="flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-950 transition-colors"
         >
-          All Projects
+          Showcase Projects
           <ArrowRight size={10} />
         </a>
       </div>

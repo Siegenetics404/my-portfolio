@@ -47,7 +47,7 @@ export default function SideProjects() {
         <section className="mt-16">
             {/* Section title */}
             <h2 className="text-sm font-medium tracking-tight text-neutral-950 border-b border-neutral-200 pb-4">
-                Side Projects
+                Other Projects
             </h2>
 
             {/* 2x2 grid — image on top, description below, no logo/status/actions */}

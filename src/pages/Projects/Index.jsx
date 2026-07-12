@@ -1,6 +1,7 @@
 import UserSidebar from "../../components/layouts/UserSidebar";
 import ProjectCard from "./ProjectCard";
 import SideProjects from "./SideProjects";
+import ThesisProject from "./ThesisProject";
 
 export default function Index() {
     return (
@@ -19,6 +20,7 @@ export default function Index() {
                     </div>
 
                     <ProjectCard />
+                    <ThesisProject />
                     <SideProjects />
                 </div>
             </main>
