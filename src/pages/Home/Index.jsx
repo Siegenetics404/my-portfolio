@@ -72,7 +72,7 @@ export default function Home() {
                                 {["Frontend", "Backend", "Automation", "SEO"].map((tag) => (
                                     <span
                                         key={tag}
-                                        className="text-xs text-neutral-600 dark:text-neutral-400 border border-neutral-400 dark:border-neutral-700 rounded-full px-3 py-1"
+                                        className="text-[10px] text-neutral-600 dark:text-neutral-400 border border-neutral-400 dark:border-neutral-700 rounded-full px-2 py-0.5"
                                     >
                                         {tag}
                                     </span>
