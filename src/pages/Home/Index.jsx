@@ -69,7 +69,7 @@ const SOCIALS = [
 export default function Home() {
     return (
         <UserSidebar active="home">
-            <main className="flex-1 overflow-y-auto bg-white px-5 py-8 sm:px-10 sm:py-10 md:px-16 md:py-14">
+            <main className="flex-1 overflow-y-auto bg-white dark:bg-neutral-950 px-5 py-8 sm:px-10 sm:py-10 md:px-16 md:py-14">
                 <div className="max-w-3xl mx-auto">
                     <div className="flex flex-col md:flex-row md:items-stretch gap-6 md:gap-8 w-full">
                         {/* Profile image — mouse-trail hover reveal effect */}
@@ -77,13 +77,13 @@ export default function Home() {
 
                         <div className="flex flex-col gap-3 min-w-0">
                             <div className="flex items-center gap-3 flex-wrap">
-                                <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-950">
+                                <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-950 dark:text-white">
                                     Cj Franco
                                 </h1>
                                 {["Frontend", "Backend", "Automation", "SEO"].map((tag) => (
                                     <span
                                         key={tag}
-                                        className="text-xs text-neutral-500 border border-neutral-200 rounded-full px-3 py-1"
+                                        className="text-xs text-neutral-500 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 rounded-full px-3 py-1"
                                     >
                                         {tag}
                                     </span>
@@ -91,12 +91,12 @@ export default function Home() {
                             </div>
 
                             <div className="flex flex-col gap-3">
-                                <p className="text-sm text-neutral-600 leading-relaxed">
+                                <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
                                     I'm a web developer based in the Philippines, focused on building
                                     clean, functional interfaces. I enjoy turning ideas into simple,
                                     well-crafted products from front to back.
                                 </p>
-                                <p className="text-sm text-neutral-600 leading-relaxed">
+                                <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
                                     Over the past few years I've gained experience through a
                                     government internship, a startup, and freelance projects. I've
                                     built everything from marketing sites and SEO-driven landing
