@@ -33,7 +33,7 @@ const MODES = [
 ];
 
 // Static info — no backend, edit these directly.
-const NAME = "Cj Franco";
+const NAME = "CJ Franco";
 const ROLE = "Web Developer — Philippines";
 
 export default function UserSidebar({ active, children }) {
