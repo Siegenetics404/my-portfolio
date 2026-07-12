@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { ImageOff, Share2, Globe } from "lucide-react";
 import murciaLogo from "../../assets/images/projects/murcia-logo.png";
-import thesisImage from "../../assets/images/projects/landing/thesis.png";
+import thesisImage from "../../assets/images/projects/landing/thesis.webp";
 
 // Add a screenshot/map preview here once you have one.
 const THESIS = {

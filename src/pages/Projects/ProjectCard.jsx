@@ -13,11 +13,21 @@ import morphic from "../../assets/images/projects/morphic.png";
 import ycom from "../../assets/images/projects/ycom.png";
 import shepton from "../../assets/images/projects/shepton.png";
 
+import LprojectPulse from "../../assets/images/projects/landing/pulse.webp";
+import LdaverDaver from "../../assets/images/projects/landing/daver.webp";
+import Lchoros from "../../assets/images/projects/landing/choros.webp";
+import Lhocu from "../../assets/images/projects/landing/hocu.webp";
+import LwirralKitchens from "../../assets/images/projects/landing/wirral.webp";
+import Lnucleus from "../../assets/images/projects/landing/nucleus.webp";
+import Lmorphic from "../../assets/images/projects/landing/morphic.webp";
+import Lycom from "../../assets/images/projects/landing/ycom.webp";
+import Lshepton from "../../assets/images/projects/landing/shepton.webp";
+
 const PROJECTS = [
     {
         name: "Choros.io",
         logo: choros,
-        image: null,
+        image: Lchoros,
         description:
             "An AI-powered website builder platform for small trade businesses, collaboratively built — contributed front-end pages and features.",
         href: "https://choros.io",
@@ -26,7 +36,7 @@ const PROJECTS = [
     {
         name: "Daver & Daver",
         logo: daverDaver,
-        image: null,
+        image: LdaverDaver,
         description:
             "An AI-powered legal document application for drafting, reviewing, and managing legal paperwork.",
         href: "https://legal-app.choros.io/",
@@ -35,7 +45,7 @@ const PROJECTS = [
     {
         name: "Project Pulse",
         logo: projectPulse,
-        image: null,
+        image: LprojectPulse,
         description:
             "A project management platform for development and marketing teams to plan, track, and stay in sync.",
         href: "https://projectpulse.laravel.cloud/",
@@ -44,7 +54,7 @@ const PROJECTS = [
     {
         name: "HOCU",
         logo: hocu,
-        image: null,
+        image: Lhocu,
         description:
             "A plumbing company site built for fast service booking and clear customer contact.",
         href: "https://hocu-main.choros.biz/",
@@ -53,7 +63,7 @@ const PROJECTS = [
     {
         name: "Wirral Kitchens & Interiors",
         logo: wirralKitchens,
-        image: null,
+        image: LwirralKitchens,
         description:
             "A luxury kitchen and interior design showcase highlighting premium craftsmanship and finishes.",
         href: "https://wirralkitcheninteriors.co.uk/",
@@ -62,7 +72,7 @@ const PROJECTS = [
     {
         name: "Nucleus",
         logo: nucleus,
-        image: null,
+        image: Lnucleus,
         description:
             "A self-learning AI tool that adapts and personalizes based on how users interact with it.",
         href: "https://nucleus.ai",
@@ -71,7 +81,7 @@ const PROJECTS = [
     {
         name: "Morphic",
         logo: morphic,
-        image: null,
+        image: Lmorphic,
         description:
             "An AI-powered image referencing tool for gathering and organizing visual inspiration.",
         href: "https://morphic.app",
@@ -80,7 +90,7 @@ const PROJECTS = [
     {
         name: "YCOM",
         logo: ycom,
-        image: null,
+        image: Lycom,
         description:
             "A finance platform focused on forex insights, market data, and trading resources.",
         href: "https://ycom.laravel.cloud",
@@ -89,7 +99,7 @@ const PROJECTS = [
     {
         name: "Shepton Judo Club",
         logo: shepton,
-        image: null,
+        image: Lshepton,
         description:
             "A site for a UK judo club, built to showcase classes, schedules, and membership info for local members.",
         href: "https://sheptonjudo.choros.io/",

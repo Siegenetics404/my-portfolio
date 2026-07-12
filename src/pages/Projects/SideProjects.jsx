@@ -1,42 +1,46 @@
 import { ImageOff } from "lucide-react";
 
-// No live links for these yet — just concepts/practice builds.
-// Add an `image` (imported screenshot) once one exists; falls back to a
-// placeholder otherwise.
+import booking from "../../assets/images/projects/landing/booking.png";
+import inventory from "../../assets/images/projects/landing/inventory.png";
+import school from "../../assets/images/projects/landing/school.png";
+import restaurant from "../../assets/images/projects/landing/restaurant.png";
+import single from "../../assets/images/projects/landing/e-single.png";
+import multi from "../../assets/images/projects/landing/e-multi.png";
+
 const SIDE_PROJECTS = [
     {
         title: "Booking Management System",
-        image: null,
+        image: booking,
         description:
             "A reservation and scheduling tool for service-based businesses to manage bookings, availability, and customer details in one place.",
     },
     {
         title: "School Management System",
-        image: null,
+        image: school,
         description:
             "A system for handling student records, attendance, and grades — built to simplify day-to-day admin work for small schools.",
     },
     {
         title: "Inventory Management System",
-        image: null,
+        image: inventory,
         description:
             "A stock-tracking tool for small businesses to monitor inventory levels, log stock movement, and avoid running out of supply.",
     },
     {
         title: "Restaurant Ordering System",
-        image: null,
+        image: restaurant,
         description:
             "A POS and online ordering setup for restaurants, covering menu management, order tracking, and simple daily sales reporting.",
     },
     {
         title: "E-commerce — Single Product",
-        image: null,
+        image: single,
         description:
             "A focused storefront built around one product, with variant selection, checkout flow, and a landing page designed to convert.",
     },
     {
         title: "E-commerce — Multiple Products",
-        image: null,
+        image: multi,
         description:
             "A full storefront with product catalog, filtering, cart, and checkout — built to handle a growing range of products.",
     },
