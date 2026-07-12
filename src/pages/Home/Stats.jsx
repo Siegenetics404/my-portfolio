@@ -8,7 +8,7 @@ const STATS = [
 export default function Stats() {
     return (
         <div
-            className="grid grid-cols-2 sm:flex sm:items-center gap-x-6 gap-y-6 sm:gap-8 mt-8 sm:mt-10 max-w-2xl bg-cover bg-center bg-[url('../../assets/images/stats/black_and_white_dot_pattern.webp')] dark:bg-none"
+            className="grid grid-cols-2 sm:flex sm:items-center sm:justify-between gap-x-6 gap-y-6 mt-8 sm:mt-10 bg-cover bg-center bg-[url('../../assets/images/stats/black_and_white_dot_pattern.webp')] dark:bg-none"
         >
             {STATS.map((stat, i) => (
                 <div
