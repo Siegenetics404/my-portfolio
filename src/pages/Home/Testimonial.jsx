@@ -31,15 +31,15 @@ export default function Testimonial() {
     return (
         <section className="mt-16 max-w-3xl">
             {/* Section title */}
-            <div className="flex items-center justify-between border-b border-neutral-200 pb-4">
-                <h2 className="text-sm font-medium tracking-tight text-neutral-950">
-                    <span className="font-mono text-neutral-400 mr-2">04 —</span>
+            <div className="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 pb-4">
+                <h2 className="text-sm font-medium tracking-tight text-neutral-950 dark:text-white">
+                    <span className="font-mono text-neutral-400 dark:text-neutral-600 mr-2">04 —</span>
                     Recommendations
                 </h2>
 
 
                 <a href="/testimonials"
-                    className="flex items-center gap-1 text-sm text-neutral-600 hover:text-neutral-950 transition-colors"
+                    className="flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors"
                 >
                     Full Testimonial
                     <ArrowRight size={10} />
@@ -53,38 +53,38 @@ export default function Testimonial() {
                         key={t.name}
                         type="button"
                         onClick={() => setActiveVideo(t)}
-                        className="relative flex flex-col justify-between border border-neutral-200 rounded-lg p-5 overflow-hidden text-left hover:border-neutral-950 transition-colors"
+                        className="relative flex flex-col justify-between border border-neutral-200 dark:border-neutral-800 rounded-lg p-5 overflow-hidden text-left hover:border-neutral-950 dark:hover:border-neutral-600 transition-colors"
                     >
                         <svg
                             width="64"
                             height="64"
                             viewBox="0 0 24 24"
-                            className="absolute -top-3 -right-2 text-orange-200/50"
+                            className="absolute -top-3 -right-2 text-orange-200/50 dark:text-orange-900/40"
                             fill="currentColor"
                         >
                             <path d="M9.5 8C7 8 5 10 5 12.5c0 2.2 1.6 4 3.7 4.4-.3 1.4-1.4 2.5-2.7 3.1v1.5c2.8-.5 5.5-2.6 5.5-6.5V13c0-2.8-1-5-2-5Zm9 0c-2.5 0-4.5 2-4.5 4.5 0 2.2 1.6 4 3.7 4.4-.3 1.4-1.4 2.5-2.7 3.1v1.5c2.8-.5 5.5-2.6 5.5-6.5V13c0-2.8-1-5-2-5Z" />
                         </svg>
 
-                        <p className="relative text-xs text-neutral-600 leading-relaxed">
+                        <p className="relative text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
                             {t.quote}
                         </p>
 
-                        <div className="relative flex items-center gap-3 mt-5 pt-4 border-t border-neutral-100">
+                        <div className="relative flex items-center gap-3 mt-5 pt-4 border-t border-neutral-100 dark:border-neutral-900">
                             <img
                                 src={t.avatar}
                                 alt={t.name}
-                                className="w-9 h-9 rounded-full object-cover border border-neutral-200 shrink-0"
+                                className="w-9 h-9 rounded-full object-cover border border-neutral-200 dark:border-neutral-800 shrink-0"
                             />
                             <div>
-                                <p className="text-sm font-medium text-neutral-950">{t.name}</p>
-                                <p className="text-xs text-neutral-600 mt-0.5">{t.title}</p>
+                                <p className="text-sm font-medium text-neutral-950 dark:text-white">{t.name}</p>
+                                <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">{t.title}</p>
                             </div>
                         </div>
                     </button>
                 ))}
             </div>
 
-            {/* Video modal */}
+            {/* Video modal — already dark, unchanged */}
             {
                 activeVideo && (
                     <div

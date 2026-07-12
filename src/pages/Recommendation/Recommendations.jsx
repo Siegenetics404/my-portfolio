@@ -30,8 +30,8 @@ export default function Recommendations() {
     return (
         <section className="mt-8">
             {/* Section title */}
-            <h2 className="text-sm font-medium tracking-tight text-neutral-950 border-b border-neutral-200 pb-4">
-                <span className="font-mono text-neutral-400 mr-2">01 —</span>
+            <h2 className="text-sm font-medium tracking-tight text-neutral-950 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-4">
+                <span className="font-mono text-neutral-400 dark:text-neutral-600 mr-2">01 —</span>
                 Recommendations
             </h2>
 
@@ -40,32 +40,32 @@ export default function Recommendations() {
                 {RECOMMENDATIONS.map((r) => (
                     <div
                         key={r.name}
-                        className="relative border border-neutral-200 rounded-lg p-5 sm:p-6 overflow-hidden"
+                        className="relative border border-neutral-200 dark:border-neutral-800 rounded-lg p-5 sm:p-6 overflow-hidden"
                     >
                         <svg
                             width="72"
                             height="72"
                             viewBox="0 0 24 24"
-                            className="absolute -top-3 -right-2 text-orange-200/50"
+                            className="absolute -top-3 -right-2 text-orange-200/50 dark:text-orange-900/40"
                             fill="currentColor"
                         >
                             <path d="M9.5 8C7 8 5 10 5 12.5c0 2.2 1.6 4 3.7 4.4-.3 1.4-1.4 2.5-2.7 3.1v1.5c2.8-.5 5.5-2.6 5.5-6.5V13c0-2.8-1-5-2-5Zm9 0c-2.5 0-4.5 2-4.5 4.5 0 2.2 1.6 4 3.7 4.4-.3 1.4-1.4 2.5-2.7 3.1v1.5c2.8-.5 5.5-2.6 5.5-6.5V13c0-2.8-1-5-2-5Z" />
                         </svg>
 
-                        <p className="relative text-sm text-neutral-600 leading-relaxed">
+                        <p className="relative text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
                             {r.summary}
                         </p>
 
-                        <div className="relative flex items-center justify-between flex-wrap gap-3 mt-5 pt-4 border-t border-neutral-100">
+                        <div className="relative flex items-center justify-between flex-wrap gap-3 mt-5 pt-4 border-t border-neutral-100 dark:border-neutral-900">
                             <div className="flex items-center gap-3">
                                 <img
                                     src={r.avatar}
                                     alt={r.name}
-                                    className="w-10 h-10 rounded-full object-cover border border-neutral-200 shrink-0"
+                                    className="w-10 h-10 rounded-full object-cover border border-neutral-200 dark:border-neutral-800 shrink-0"
                                 />
                                 <div>
-                                    <p className="text-sm font-medium text-neutral-950">{r.name}</p>
-                                    <p className="text-xs text-neutral-600 mt-0.5">{r.title}</p>
+                                    <p className="text-sm font-medium text-neutral-950 dark:text-white">{r.name}</p>
+                                    <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">{r.title}</p>
                                 </div>
                             </div>
 
@@ -73,7 +73,7 @@ export default function Recommendations() {
                                 <button
                                     type="button"
                                     onClick={() => setActiveVideo(r)}
-                                    className="flex items-center gap-1.5 text-xs text-neutral-500 hover:text-neutral-950 transition-colors"
+                                    className="flex items-center gap-1.5 text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors"
                                 >
                                     <Play size={12} fill="currentColor" />
                                     Watch video
@@ -84,7 +84,7 @@ export default function Recommendations() {
                 ))}
             </div>
 
-            {/* Video modal */}
+            {/* Video modal — already dark, unchanged */}
             {activeVideo && (
                 <div
                     className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-6"

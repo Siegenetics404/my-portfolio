@@ -60,3 +60,74 @@
 /* * {
   border: 1px red solid;
 } */
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fafafa;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4d4d4;
+  border-radius: 9999px;
+  border: 2px solid #fafafa;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a3a3a3;
+}
+
+/* Dark mode */
+.dark ::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #404040;
+  border: 2px solid #0a0a0a;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #525252;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #d4d4d4 #fafafa;
+}
+
+.dark {
+  scrollbar-color: #404040 #0a0a0a;
+}
+
+/* Dark mode wave transition */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+@keyframes wave-reveal {
+  from {
+    clip-path: circle(0% at var(--wave-x) var(--wave-y));
+  }
+  to {
+    clip-path: circle(150% at var(--wave-x) var(--wave-y));
+  }
+}
+
+.wave-transition::view-transition-new(root) {
+  animation: wave-reveal 0.6s ease-in-out;
+}

@@ -50,7 +50,7 @@ export default function SideProjects() {
     return (
         <section className="mt-16">
             {/* Section title */}
-            <h2 className="text-sm font-medium tracking-tight text-neutral-950 border-b border-neutral-200 pb-4">
+            <h2 className="text-sm font-medium tracking-tight text-neutral-950 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-4">
                 Other Projects
             </h2>
 
@@ -59,10 +59,10 @@ export default function SideProjects() {
                 {SIDE_PROJECTS.map((project) => (
                     <div
                         key={project.title}
-                        className="border border-neutral-200 rounded-lg overflow-hidden"
+                        className="border border-neutral-200 dark:border-neutral-800 rounded-lg overflow-hidden"
                     >
                         {/* Image / fallback */}
-                        <div className="w-full h-40 bg-neutral-50 border-b border-neutral-200">
+                        <div className="w-full h-40 bg-neutral-50 dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800">
                             {project.image ? (
                                 <img
                                     src={project.image}
@@ -70,7 +70,7 @@ export default function SideProjects() {
                                     className="w-full h-full object-cover"
                                 />
                             ) : (
-                                <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-neutral-300">
+                                <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-neutral-300 dark:text-neutral-700">
                                     <ImageOff size={20} />
                                     <span className="text-[10px] uppercase tracking-wide">
                                         No preview
@@ -81,10 +81,10 @@ export default function SideProjects() {
 
                         {/* Description */}
                         <div className="p-4">
-                            <p className="text-sm font-medium text-neutral-950">
+                            <p className="text-sm font-medium text-neutral-950 dark:text-white">
                                 {project.title}
                             </p>
-                            <p className="text-xs text-neutral-600 leading-relaxed mt-1.5">
+                            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mt-1.5">
                                 {project.description}
                             </p>
                         </div>

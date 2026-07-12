@@ -50,8 +50,8 @@ export default function Skills() {
             {SKILL_GROUPS.map((group, i) => (
                 <section key={group.title}>
                     {/* Section title */}
-                    <h2 className="text-sm font-medium tracking-tight text-neutral-950 border-b border-neutral-200 pb-4">
-                        <span className="font-mono text-neutral-400 mr-2">
+                    <h2 className="text-sm font-medium tracking-tight text-neutral-950 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-4">
+                        <span className="font-mono text-neutral-400 dark:text-neutral-600 mr-2">
                             {String(i + 1).padStart(2, "0")} —
                         </span>
                         {group.title}
@@ -62,7 +62,7 @@ export default function Skills() {
                         {group.items.map((item) => (
                             <span
                                 key={item}
-                                className="text-xs text-neutral-600 border border-neutral-400 rounded-full px-3 py-1 hover:border-neutral-950 hover:text-neutral-950 transition-colors"
+                                className="text-xs text-neutral-600 dark:text-neutral-400 border border-neutral-400 dark:border-neutral-700 rounded-full px-3 py-1 hover:border-neutral-950 hover:text-neutral-950 dark:hover:border-white dark:hover:text-white transition-colors"
                             >
                                 {item}
                             </span>

@@ -5,6 +5,16 @@
     <link rel="icon" type="image/png" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cj Franco — Web Developer</title>
+    <script>
+      (function () {
+        var mode = localStorage.getItem("theme-mode") || "system";
+        var systemDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        var isDark = mode === "dark" || (mode === "system" && systemDark);
+        if (isDark) document.documentElement.classList.add("dark");
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

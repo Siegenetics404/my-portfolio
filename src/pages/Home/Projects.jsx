@@ -99,17 +99,17 @@ const PROJECTS = [
 const STATUS_STYLES = {
   active: {
     label: "Active",
-    className: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    className: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900",
     dot: "bg-emerald-500",
   },
   pending: {
     label: "Pending",
-    className: "bg-amber-50 text-amber-700 border-amber-200",
+    className: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900",
     dot: "bg-amber-500",
   },
   ongoing: {
     label: "Ongoing",
-    className: "bg-blue-50 text-blue-700 border-blue-200",
+    className: "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/40 dark:text-blue-400 dark:border-blue-900",
     dot: "bg-blue-500",
   },
 };
@@ -133,15 +133,15 @@ export default function Projects() {
   return (
     <section className="mt-12 sm:mt-16 max-w-3xl relative">
       {/* Section title */}
-      <div className="flex items-center justify-between flex-wrap gap-2 border-b border-neutral-200 pb-4">
-        <h2 className="text-sm font-medium tracking-tight text-neutral-950">
-          <span className="font-mono text-neutral-400 mr-2">01 —</span>
+      <div className="flex items-center justify-between flex-wrap gap-2 border-b border-neutral-200 dark:border-neutral-800 pb-4">
+        <h2 className="text-sm font-medium tracking-tight text-neutral-950 dark:text-white">
+          <span className="font-mono text-neutral-400 dark:text-neutral-600 mr-2">01 —</span>
           Featured Projects
         </h2>
 
-        <a
-          href="/projects"
-          className="flex items-center gap-1 text-sm text-neutral-600 hover:text-neutral-950 transition-colors"
+
+        <a href="/projects"
+          className="flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors"
         >
           Showcase Projects
           <ArrowRight size={10} />
@@ -158,8 +158,8 @@ export default function Projects() {
               type="button"
               onClick={() => setActiveFilter(filter)}
               className={`text-xs rounded-full px-3 py-1 border transition-colors ${isActive
-                ? "bg-neutral-950 text-white border-neutral-950"
-                : "text-neutral-600 border-neutral-400 hover:border-neutral-950 hover:text-neutral-950"
+                ? "bg-neutral-950 text-white border-neutral-950 dark:bg-white dark:text-neutral-950 dark:border-white"
+                : "text-neutral-600 border-neutral-400 hover:border-neutral-950 hover:text-neutral-950 dark:text-neutral-400 dark:border-neutral-700 dark:hover:border-white dark:hover:text-white"
                 }`}
             >
               {filter}
@@ -182,11 +182,11 @@ export default function Projects() {
             <CardTag
               key={project.name}
               {...cardProps}
-              className="group relative flex flex-col justify-between border border-neutral-200 rounded-lg p-4 sm:p-5 text-left hover:border-neutral-950 transition-colors"
+              className="group relative flex flex-col justify-between border border-neutral-200 dark:border-neutral-800 rounded-lg p-4 sm:p-5 text-left hover:border-neutral-950 dark:hover:border-neutral-600 transition-colors"
             >
               {/* Floating tooltip — only for pending projects, doesn't affect layout */}
               {project.status === "pending" && (
-                <span className="absolute top-4 right-5 whitespace-nowrap bg-neutral-950 text-white text-[10px] font-normal px-2 py-1 rounded-md opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all pointer-events-none z-10">
+                <span className="absolute top-4 right-5 whitespace-nowrap bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 text-[10px] font-normal px-2 py-1 rounded-md opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all pointer-events-none z-10">
                   Server on hold
                 </span>
               )}
@@ -197,9 +197,9 @@ export default function Projects() {
                     <img
                       src={project.logo}
                       alt={`${project.name} logo`}
-                      className="w-6 h-6 rounded-md object-cover border border-neutral-200 shrink-0"
+                      className="w-6 h-6 rounded-md object-cover border border-neutral-200 dark:border-neutral-800 shrink-0"
                     />
-                    <h3 className="text-sm font-medium text-neutral-950 truncate">
+                    <h3 className="text-sm font-medium text-neutral-950 dark:text-white truncate">
                       {project.name}
                     </h3>
                   </div>
@@ -211,7 +211,7 @@ export default function Projects() {
                     {status.label}
                   </span>
                 </div>
-                <p className="text-xs text-neutral-600 leading-relaxed mt-2">
+                <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mt-2">
                   {project.description}
                 </p>
               </div>
@@ -222,7 +222,7 @@ export default function Projects() {
 
       {/* Toast — shown when an ongoing project card is clicked */}
       <div
-        className={`fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] sm:w-auto max-w-xs text-center bg-neutral-950 text-white text-sm px-4 py-2.5 rounded-lg shadow-lg transition-all duration-300 z-50 ${toastVisible
+        className={`fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] sm:w-auto max-w-xs text-center bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 text-sm px-4 py-2.5 rounded-lg shadow-lg transition-all duration-300 z-50 ${toastVisible
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-2 pointer-events-none"
           }`}

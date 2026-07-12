@@ -51,7 +51,7 @@ export default function ProfileImage() {
     return (
         <div
             ref={containerRef}
-            className="relative w-full h-64 md:w-48 md:h-auto overflow-hidden border border-neutral-200 shrink-0"
+            className="relative w-full h-64 md:w-48 md:h-auto overflow-hidden border border-neutral-200 dark:border-neutral-800 shrink-0"
         >
             {/* Base image */}
             <img

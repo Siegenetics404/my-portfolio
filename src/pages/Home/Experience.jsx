@@ -22,15 +22,15 @@ export default function Experience() {
   return (
     <section className="mt-12 sm:mt-16 max-w-3xl">
       {/* Section title */}
-      <div className="flex items-center justify-between flex-wrap gap-2 border-b border-neutral-200 pb-4">
-        <h2 className="text-sm font-medium tracking-tight text-neutral-950">
-          <span className="font-mono text-neutral-400 mr-2">02 —</span>
+      <div className="flex items-center justify-between flex-wrap gap-2 border-b border-neutral-200 dark:border-neutral-800 pb-4">
+        <h2 className="text-sm font-medium tracking-tight text-neutral-950 dark:text-white">
+          <span className="font-mono text-neutral-400 dark:text-neutral-600 mr-2">02 —</span>
           Experience
         </h2>
 
-        <a
-          href="/experience"
-          className="flex items-center gap-1 text-sm text-neutral-600 hover:text-neutral-950 transition-colors"
+
+        <a href="/experience"
+          className="flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors"
         >
           Full Story
           <ArrowRight size={10} />
@@ -42,19 +42,19 @@ export default function Experience() {
         {EXPERIENCE.map((item, i) => (
           <li
             key={item.role + item.period}
-            className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-0 py-4 sm:py-5 ${i !== EXPERIENCE.length - 1 ? "border-b border-neutral-100" : ""
+            className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-0 py-4 sm:py-5 ${i !== EXPERIENCE.length - 1 ? "border-b border-neutral-100 dark:border-neutral-900" : ""
               }`}
           >
             <div>
-              <p className="text-sm font-medium text-neutral-950">{item.role}</p>
-              <p className="text-xs text-neutral-500 mt-0.5">{item.company}</p>
+              <p className="text-sm font-medium text-neutral-950 dark:text-white">{item.role}</p>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">{item.company}</p>
             </div>
-            <span className="text-xs font-mono text-neutral-500 whitespace-nowrap">
+            <span className="text-xs font-mono text-neutral-500 dark:text-neutral-400 whitespace-nowrap">
               {item.period}
             </span>
           </li>
         ))}
       </ul>
-    </section>
+    </section >
   );
 }

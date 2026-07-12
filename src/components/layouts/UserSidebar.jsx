@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Download, Mail, Menu, X } from "lucide-react";
+import { Download, Mail, Menu, X, Sun, Moon, Monitor } from "lucide-react";
 import logo from "../../assets/images/about/profile-logo.png";
 import resumeFile from "../../assets/files/Cj Franco - Resume.pdf";
 
@@ -26,20 +26,68 @@ const NAV_GROUPS = [
     },
 ];
 
+const MODES = [
+    { id: "light", label: "Light", icon: Sun },
+    { id: "dark", label: "Dark", icon: Moon },
+    { id: "system", label: "System", icon: Monitor },
+];
+
 // Static info — no backend, edit these directly.
 const NAME = "Cj Franco";
 const ROLE = "Web Developer — Philippines";
 
 export default function UserSidebar({ active, children }) {
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [mode, setMode] = useState(() => localStorage.getItem("theme-mode") || "system");
     const closeMobile = () => setMobileOpen(false);
+
+    // Apply the resolved theme to <html> and persist the user's choice
+    useEffect(() => {
+        const root = document.documentElement;
+        const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const isDark = mode === "dark" || (mode === "system" && systemDark);
+
+        root.classList.toggle("dark", isDark);
+        localStorage.setItem("theme-mode", mode);
+
+        if (mode === "system") {
+            const mq = window.matchMedia("(prefers-color-scheme: dark)");
+            const handler = (e) => root.classList.toggle("dark", e.matches);
+            mq.addEventListener("change", handler);
+            return () => mq.removeEventListener("change", handler);
+        }
+    }, [mode]);
+
+    // Wave-reveal transition when switching modes — falls back to an
+    // instant switch on browsers without the View Transitions API.
+    const handleModeChange = (id, event) => {
+        const x = event.clientX;
+        const y = event.clientY;
+
+        if (!document.startViewTransition) {
+            setMode(id);
+            return;
+        }
+
+        document.documentElement.style.setProperty("--wave-x", `${x}px`);
+        document.documentElement.style.setProperty("--wave-y", `${y}px`);
+        document.documentElement.classList.add("wave-transition");
+
+        const transition = document.startViewTransition(() => {
+            setMode(id);
+        });
+
+        transition.finished.finally(() => {
+            document.documentElement.classList.remove("wave-transition");
+        });
+    };
 
     // Shared between the desktop sidebar and the mobile dropdown.
     const NavGroups = () => (
         <div className="flex flex-col gap-5">
             {NAV_GROUPS.map((group) => (
                 <nav key={group.title}>
-                    <p className="text-[10px] font-medium text-neutral-400 uppercase tracking-wide mb-1.5 px-2">
+                    <p className="text-[10px] font-medium text-neutral-400 dark:text-neutral-600 uppercase tracking-wide mb-1.5 px-2">
                         {group.title}
                     </p>
                     <ul className="space-y-0.5">
@@ -54,22 +102,22 @@ export default function UserSidebar({ active, children }) {
                                             download="Cj Franco - Resume.pdf"
                                             onClick={closeMobile}
                                             className={`flex items-center justify-between px-2 py-1.5 text-sm rounded-md transition-colors ${isActive
-                                                ? "bg-neutral-950 text-white"
-                                                : "text-neutral-600 hover:text-neutral-950"
+                                                ? "bg-neutral-950 text-white dark:bg-white dark:text-neutral-950"
+                                                : "text-neutral-600 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
                                                 }`}
                                         >
                                             {item.label}
                                             <Download
                                                 size={14}
                                                 className={`opacity-0 group-hover:opacity-100 transition-opacity ${isActive
-                                                    ? "text-white/70"
-                                                    : "text-neutral-400 group-hover:text-neutral-950"
+                                                    ? "text-white/70 dark:text-neutral-950/70"
+                                                    : "text-neutral-400 group-hover:text-neutral-950 dark:text-neutral-400 dark:group-hover:text-white"
                                                     }`}
                                             />
                                         </a>
 
                                         {/* Tooltip — lets users know clicking downloads the file */}
-                                        <span className="absolute left-1/2 -translate-x-1/4 bottom-full mb-2 whitespace-nowrap bg-neutral-950 text-white text-[10px] font-normal px-2 py-1 rounded-md opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all pointer-events-none z-10">
+                                        <span className="absolute left-1/2 -translate-x-1/4 bottom-full mb-2 whitespace-nowrap bg-neutral-950 text-white  text-[10px] font-normal px-2 py-1 rounded-md opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all pointer-events-none z-10">
                                             Click to download resume
                                         </span>
                                     </li>
@@ -82,8 +130,8 @@ export default function UserSidebar({ active, children }) {
                                         to={item.path}
                                         onClick={closeMobile}
                                         className={`block px-2 py-1.5 text-sm rounded-md transition-colors ${isActive
-                                            ? "bg-neutral-950 text-white"
-                                            : "text-neutral-600 hover:text-neutral-950"
+                                            ? "bg-neutral-950 text-white dark:bg-white dark:text-neutral-950"
+                                            : "text-neutral-600 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
                                             }`}
                                     >
                                         {item.label}
@@ -95,22 +143,49 @@ export default function UserSidebar({ active, children }) {
                 </nav>
             ))
             }
+
+            {/* Mode toggle */}
+            <div>
+                <p className="text-[10px] font-medium text-neutral-400 dark:text-neutral-600 uppercase tracking-wide mb-1.5 px-2">
+                    Mode
+                </p>
+                <div className="flex items-center gap-1 border border-neutral-200 dark:border-neutral-800 rounded-md p-1 mx-2">
+                    {MODES.map(({ id, label, icon: Icon }) => {
+                        const isSelected = mode === id;
+                        return (
+                            <button
+                                key={id}
+                                type="button"
+                                onClick={(e) => handleModeChange(id, e)}
+                                aria-label={label}
+                                aria-pressed={isSelected}
+                                className={`flex-1 flex items-center justify-center py-1.5 rounded transition-colors ${isSelected
+                                    ? "bg-neutral-950 text-white dark:bg-white dark:text-neutral-950"
+                                    : "text-neutral-500 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
+                                    }`}
+                            >
+                                <Icon size={14} />
+                            </button>
+                        );
+                    })}
+                </div>
+            </div>
         </div >
     );
 
     const Footer = () => (
-        <div className="border-t border-neutral-200 pt-3 px-2">
-            <p className="text-sm font-medium text-neutral-950">{NAME}</p>
-            <p className="text-xs text-neutral-500">{ROLE}</p>
+        <div className="border-t border-neutral-200 dark:border-neutral-800 pt-3 px-2">
+            <p className="text-sm font-medium text-neutral-950 dark:text-white">{NAME}</p>
+            <p className="text-xs text-neutral-500 dark:text-neutral-400">{ROLE}</p>
 
-            <p className="text-xs text-neutral-500 mt-4 leading-relaxed">
+            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-4 leading-relaxed">
                 Open to full-time roles and freelance work. Let's talk.
             </p>
 
             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=franco.cj03@gmail.com&su=Let's%20Work%20Together&body=Hi%20CJ,%20I%20would%20like%20to%20discuss%20a%20project..."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center font-semibold gap-1.5 text-xs text-neutral-600 hover:text-neutral-950 transition-colors mt-1"
+                className="flex items-center font-semibold gap-1.5 text-xs text-neutral-600 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white transition-colors mt-1"
             >
                 <Mail size={12} />
                 franco.cj03@gmail.com
@@ -119,10 +194,10 @@ export default function UserSidebar({ active, children }) {
     );
 
     return (
-        <div className="h-screen w-full bg-white text-neutral-950 flex flex-col md:flex-row overflow-hidden">
+        <div className="h-screen w-full bg-white text-neutral-950 dark:bg-neutral-950 dark:text-white flex flex-col md:flex-row overflow-hidden">
             {/* Mobile top bar + dropdown */}
             <div className="md:hidden relative shrink-0 z-40">
-                <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-200 bg-white relative z-10">
+                <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 relative z-10">
                     <Link to="/" onClick={closeMobile} className="flex items-center gap-2">
                         <img src={logo} alt="Logo" className="w-7 h-7 rounded-md object-cover" />
                         <span className="text-lg font-semibold tracking-tight">{NAME}</span>
@@ -130,7 +205,7 @@ export default function UserSidebar({ active, children }) {
                     <button
                         onClick={() => setMobileOpen((v) => !v)}
                         aria-label={mobileOpen ? "Close menu" : "Open menu"}
-                        className="p-1 text-neutral-600 hover:text-neutral-950 transition-colors"
+                        className="p-1 text-neutral-600 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white transition-colors"
                     >
                         {mobileOpen ? <X size={22} /> : <Menu size={22} />}
                     </button>
@@ -138,7 +213,7 @@ export default function UserSidebar({ active, children }) {
 
                 {/* Dropdown panel — expands downward below the top bar */}
                 <div
-                    className={`absolute left-0 right-0 top-full bg-white border-b border-neutral-200 shadow-sm overflow-hidden transition-all duration-300 ease-out ${mobileOpen ? "max-h-[75vh]" : "max-h-0"
+                    className={`absolute left-0 right-0 top-full bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 shadow-sm overflow-hidden transition-all duration-300 ease-out ${mobileOpen ? "max-h-[75vh]" : "max-h-0"
                         }`}
                 >
                     <div className="px-6 py-6 overflow-y-auto max-h-[75vh] flex flex-col gap-6">
@@ -157,7 +232,7 @@ export default function UserSidebar({ active, children }) {
             )}
 
             {/* Desktop sidebar */}
-            <aside className="hidden md:flex w-64 shrink-0 bg-white border-r border-neutral-200 px-6 py-8 flex-col justify-between overflow-y-auto">
+            <aside className="hidden md:flex w-64 shrink-0 bg-white dark:bg-neutral-950 border-r border-neutral-200 dark:border-neutral-800 px-6 py-8 flex-col justify-between overflow-y-auto">
                 <div>
                     <Link to="/" className="flex items-center gap-2 px-2 w-fit mb-8">
                         <img src={logo} alt="Logo" className="w-7 h-7 rounded-md object-cover" />
