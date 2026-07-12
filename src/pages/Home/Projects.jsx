@@ -9,7 +9,6 @@ import nucleus from "../../assets/images/projects/nucleus.png";
 import morphic from "../../assets/images/projects/morphic.png";
 import ycom from "../../assets/images/projects/ycom.png";
 import shepton from "../../assets/images/projects/shepton.png";
-import { Link } from "react-router-dom";
 
 const FILTERS = ["All", "Collaboration", "Solo", "Personal", "Industry", "AI-Integrated"];
 
@@ -140,13 +139,13 @@ export default function Projects() {
           Featured Projects
         </h2>
 
-        <Link
+        <a
           href="/projects"
           className="flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-950 transition-colors"
         >
           All Projects
           <ArrowRight size={10} />
-        </Link>
+        </a>
       </div>
 
       {/* Category filters */}
