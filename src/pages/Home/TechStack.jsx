@@ -27,7 +27,7 @@ export default function TechStack() {
                 </h2>
 
 
-                <a href="/tech-stack"
+                <a href="/tools"
                     className="flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors"
                 >
                     View All
