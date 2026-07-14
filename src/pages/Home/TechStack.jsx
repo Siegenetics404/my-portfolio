@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 const TECH_STACK = [
     "React",
     "React Native",
+    "Expo",
     "TypeScript",
     "Inertia.js",
     "Tailwind CSS",
