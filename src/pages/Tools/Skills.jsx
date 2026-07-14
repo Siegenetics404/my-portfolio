@@ -5,7 +5,7 @@ const SKILL_GROUPS = [
     },
     {
         title: "Frontend",
-        items: ["React", "Inertia.js", "HTML5", "CSS3", "Tailwind CSS", "Bootstrap"],
+        items: ["React", "React Native", "Expo", "Inertia.js", "HTML5", "CSS3", "Tailwind CSS", "Bootstrap"],
     },
     {
         title: "Backend",
