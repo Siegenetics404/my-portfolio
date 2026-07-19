@@ -29,7 +29,7 @@ const SKILL_GROUPS = [
     },
     {
         title: "Collaboration",
-        items: ["Zoom", "Google Meet", "Miro", "Trello", "WhatsApp"],
+        items: ["Zoom", "Google Meet", "Miro", "Trello", "WhatsApp", "Discord"],
     },
     {
         title: "Other",
