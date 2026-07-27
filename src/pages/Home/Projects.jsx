@@ -45,8 +45,8 @@ const PROJECTS = [
     logo: hocu,
     description:
       "A plumbing company site built for fast service booking and clear customer contact.",
-    href: "https://hocu-main.choros.biz/",
-    status: "pending",
+    href: "https://hocu.co.uk/",
+    status: "active",
     categories: ["Solo", "Industry"],
   },
   {

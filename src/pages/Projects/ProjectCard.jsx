@@ -57,8 +57,8 @@ const PROJECTS = [
         image: Lhocu,
         description:
             "A plumbing company site built for fast service booking and clear customer contact.",
-        href: "https://hocu-main.choros.biz/",
-        status: "pending",
+        href: "https://hocu.co.uk/",
+        status: "active",
     },
     {
         name: "Wirral Kitchens & Interiors",
