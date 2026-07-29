@@ -78,7 +78,7 @@ export default function Home() {
                         <div className="flex flex-col gap-3 min-w-0">
                             <div className="flex items-center gap-3 flex-wrap">
                                 <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-950 dark:text-white">
-                                    Cj Franco
+                                    CJ Franco
                                 </h1>
                                 {["Frontend", "Backend", "Automation", "SEO"].map((tag) => (
                                     <span
