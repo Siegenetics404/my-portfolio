@@ -21,7 +21,7 @@ const SKILL_GROUPS = [
     },
     {
         title: "Tools & Platforms",
-        items: ["Git", "GitHub", "Docker", "Postman", "VS Code", "WebStorm", "Expo Go", "Figma", "n8n", "PostHog", "Clerk"],
+        items: ["Git", "GitHub", "Docker", "Postman", "VS Code", "WebStorm", "Expo Go", "Figma", "n8n", "PostHog", "Clerk", "Neon"],
     },
     {
         title: "Cloud & Deployment",

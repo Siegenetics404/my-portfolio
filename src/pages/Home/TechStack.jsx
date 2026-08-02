@@ -8,6 +8,7 @@ const TECH_STACK = [
     "Inertia.js",
     "Tailwind CSS",
     "NativeWind",
+    "Express.js",
     "HTML",
     "CSS",
     "Laravel",
