@@ -21,7 +21,7 @@ const SKILL_GROUPS = [
     },
     {
         title: "Tools & Platforms",
-        items: ["Git", "GitHub", "Docker", "Postman", "VS Code", "WebStorm", "Expo Go", "Figma", "n8n", "PostHog", "Clerk", "Neon"],
+        items: ["Git", "GitHub", "Docker", "Postman", "VS Code", "WebStorm", "Expo Go", "Figma", "n8n", "PostHog", "Clerk", "Neon", "ArcGIS", "AutoCAD"],
     },
     {
         title: "Cloud & Deployment",
@@ -34,7 +34,7 @@ const SKILL_GROUPS = [
     {
         title: "Other",
         items: [
-            "SEO Optimization",
+            "SEO Performance",
             "Responsive Web Design",
             "Agile Development",
             "QA Testing",
