@@ -1,8 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Download, Menu, X, Sun, Moon, Monitor, ChevronsUpDown, ArrowUpRight } from "lucide-react";
+import {
+    Download,
+    Menu,
+    X,
+    Sun,
+    Moon,
+    Monitor,
+    Volume2,
+    VolumeX,
+    ChevronsUpDown,
+    ArrowUpRight,
+} from "lucide-react";
 import logo from "../../assets/images/about/profile-logo.png";
 import resumeFile from "../../assets/files/Cj Franco - Resume.pdf";
+import soundOn from "../../assets/sfx/sound-on.wav"
+import hoverSound from "../../assets/sfx/hover.mp3";
+import clickSound from "../../assets/sfx/click.mp3";
 
 // Inline icons — brand marks like GitHub/Instagram aren't in lucide-react's
 // core set, so they're defined here instead of imported.
@@ -99,6 +113,74 @@ export default function UserSidebar({ active, children }) {
     const [socialsOpen, setSocialsOpen] = useState(false);
     const footerRef = React.useRef(null);
     const closeMobile = () => setMobileOpen(false);
+    const [resumeModalOpen, setResumeModalOpen] = useState(false);
+    const soundAudio = React.useRef(new Audio(soundOn));
+    const hoverAudio = React.useRef(new Audio(hoverSound));
+    const clickAudio = React.useRef(new Audio(clickSound));
+
+    const [soundEnabled, setSoundEnabled] = useState(() => {
+        return localStorage.getItem("sound-enabled") !== "false";
+    });
+
+    useEffect(() => {
+        localStorage.setItem("sound-enabled", String(soundEnabled));
+    }, [soundEnabled]);
+
+    useEffect(() => {
+        soundAudio.current.volume = 0.5;
+        soundAudio.current.preload = "auto";
+
+        hoverAudio.current.volume = 0.25;
+        hoverAudio.current.preload = "auto";
+
+        clickAudio.current.volume = 0.35;
+        clickAudio.current.preload = "auto";
+    }, []);
+
+    const playSound = () => {
+        if (!soundEnabled) return;
+
+        soundAudio.current.pause();
+        soundAudio.current.currentTime = 0;
+        soundAudio.current.play().catch(() => { });
+    };
+
+    // const playHover = () => {
+    //     if (!soundEnabled) return;
+
+    //     hoverAudio.current.pause();
+    //     hoverAudio.current.currentTime = 0;
+    //     hoverAudio.current.play().catch(() => { });
+    // };
+
+    const playHover = () => {
+        if (!soundEnabled) return;
+
+        const audio = hoverAudio.current.cloneNode();
+        audio.volume = hoverAudio.current.volume;
+        audio.play().catch(() => { });
+    };
+
+    const playClick = () => {
+        if (!soundEnabled) return;
+
+        const audio = clickAudio.current.cloneNode();
+        audio.volume = clickAudio.current.volume;
+        audio.play().catch(() => { });
+    };
+
+    const downloadResume = () => {
+        const link = document.createElement("a");
+
+        link.href = resumeFile;
+        link.download = "CJ Franco - Resume.pdf";
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        setResumeModalOpen(false);
+    };
 
     // Close the socials popover on outside click.
     useEffect(() => {
@@ -168,29 +250,21 @@ export default function UserSidebar({ active, children }) {
 
                             if (isResume) {
                                 return (
-                                    <li key={item.id} className="group relative">
-                                        <a href={resumeFile}
-                                            download="Cj Franco - Resume.pdf"
-                                            onClick={closeMobile}
-                                            className={`flex items-center justify-between px-2 py-1.5 text-sm rounded-md transition-colors ${isActive
+                                    <li key={item.id}>
+                                        <button
+                                            type="button"
+                                            onMouseEnter={playHover}
+                                            onClick={() => {
+                                                playClick();
+                                                setResumeModalOpen(true)
+                                            }}
+                                            className={`block w-full rounded-md px-2 py-1.5 text-left text-sm transition-colors ${isActive
                                                 ? "bg-neutral-950 text-white dark:bg-white dark:text-neutral-950"
                                                 : "text-neutral-600 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
                                                 }`}
                                         >
                                             {item.label}
-                                            <Download
-                                                size={14}
-                                                className={`opacity-0 group-hover:opacity-100 transition-opacity ${isActive
-                                                    ? "text-white/70 dark:text-neutral-950/70"
-                                                    : "text-neutral-400 group-hover:text-neutral-950 dark:text-neutral-400 dark:group-hover:text-white"
-                                                    }`}
-                                            />
-                                        </a>
-
-                                        {/* Tooltip — lets users know clicking downloads the file */}
-                                        <span className="absolute left-1/2 -translate-x-1/4 bottom-full mb-2 whitespace-nowrap bg-neutral-950 text-white  text-[10px] font-normal px-2 py-1 rounded-md opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all pointer-events-none z-10">
-                                            Click to download resume
-                                        </span>
+                                        </button>
                                     </li>
                                 );
                             }
@@ -199,7 +273,11 @@ export default function UserSidebar({ active, children }) {
                                 <li key={item.id}>
                                     <Link
                                         to={item.path}
-                                        onClick={closeMobile}
+                                        onClick={() => {
+                                            playClick();
+                                            closeMobile
+                                        }}
+                                        onMouseEnter={playHover}
                                         className={`block px-2 py-1.5 text-sm rounded-md transition-colors ${isActive
                                             ? "bg-neutral-950 text-white dark:bg-white dark:text-neutral-950"
                                             : "text-neutral-600 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
@@ -215,30 +293,67 @@ export default function UserSidebar({ active, children }) {
             ))
             }
 
-            {/* Mode toggle */}
+            {/* Preferences */}
             <div>
-                <p className="text-[10px] font-medium text-neutral-400 dark:text-neutral-600 uppercase tracking-wide mb-1.5 px-2">
-                    Mode
+                <p className="mb-1.5 px-2 text-[10px] font-medium uppercase tracking-wide text-neutral-400 dark:text-neutral-600">
+                    Preferences
                 </p>
-                <div className="flex items-center gap-1 border border-neutral-200 dark:border-neutral-800 rounded-md p-1 mx-2">
-                    {MODES.map(({ id, label, icon: Icon }) => {
-                        const isSelected = mode === id;
-                        return (
-                            <button
-                                key={id}
-                                type="button"
-                                onClick={(e) => handleModeChange(id, e)}
-                                aria-label={label}
-                                aria-pressed={isSelected}
-                                className={`flex-1 flex items-center justify-center py-1.5 rounded transition-colors ${isSelected
-                                    ? "bg-neutral-950 text-white dark:bg-white dark:text-neutral-950"
-                                    : "text-neutral-500 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
-                                    }`}
-                            >
-                                <Icon size={14} />
-                            </button>
-                        );
-                    })}
+
+                <div className="flex gap-2 px-2">
+                    {/* Theme */}
+                    <div className="flex flex-1 items-center gap-1 rounded-md border border-neutral-200 p-1 dark:border-neutral-800">
+                        {MODES.map(({ id, label, icon: Icon }) => {
+                            const isSelected = mode === id;
+
+                            return (
+                                <button
+                                    key={id}
+                                    type="button"
+                                    onMouseEnter={playHover}
+                                    onClick={(e) => {
+                                        playClick();
+                                        handleModeChange(id, e);
+                                    }}
+                                    aria-label={label}
+                                    title={label}
+                                    className={`flex flex-1 items-center justify-center rounded py-1.5 transition-colors ${isSelected
+                                        ? "bg-neutral-950 text-white dark:bg-white dark:text-neutral-950"
+                                        : "text-neutral-500 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
+                                        }`}
+                                >
+                                    <Icon size={14} />
+                                </button>
+                            );
+                        })}
+                    </div>
+
+                    {/* Sound */}
+                    <div className="flex items-center rounded-md border border-neutral-200 p-1 dark:border-neutral-800">
+                        <button
+                            type="button"
+                            onMouseEnter={playHover}
+                            onClick={() => {
+                                const next = !soundEnabled;
+
+                                setSoundEnabled(next);
+
+                                // Play confirmation only when turning sound on
+                                if (next) {
+                                    soundAudio.current.pause();
+                                    soundAudio.current.currentTime = 0;
+                                    soundAudio.current.play().catch(() => { });
+                                }
+                            }}
+                            aria-label={soundEnabled ? "Disable sound" : "Enable sound"}
+                            title={soundEnabled ? "Sound On" : "Sound Off"}
+                            className={`flex items-center justify-center rounded px-3 py-1.5 transition-colors ${soundEnabled
+                                ? "bg-neutral-950 text-white dark:bg-white dark:text-neutral-950"
+                                : "text-neutral-500 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
+                                }`}
+                        >
+                            {soundEnabled ? <Volume2 size={14} /> : <VolumeX size={14} />}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div >
@@ -246,7 +361,10 @@ export default function UserSidebar({ active, children }) {
 
     // Footer — avatar + name/email, click to reveal a "Connect with me" popover.
     const Footer = () => (
-        <div ref={footerRef} className="relative border-t border-neutral-200 dark:border-neutral-800 pt-3 px-2">
+        <div
+            ref={footerRef}
+            className="relative"
+        >
             {/* Popover — opens upward above the footer button */}
             <div
                 className={`absolute left-0 right-0 bottom-full mb-2 origin-bottom bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-lg overflow-hidden transition-all duration-150 ${socialsOpen
@@ -263,8 +381,10 @@ export default function UserSidebar({ active, children }) {
                             <a
                                 href={href}
                                 target="_blank"
+                                onMouseEnter={playHover}
                                 rel="noopener noreferrer"
                                 onClick={() => {
+                                    playClick();
                                     setSocialsOpen(false);
                                     closeMobile();
                                 }}
@@ -284,7 +404,11 @@ export default function UserSidebar({ active, children }) {
             {/* Trigger */}
             <button
                 type="button"
-                onClick={() => setSocialsOpen((v) => !v)}
+                onMouseEnter={playHover}
+                onClick={() => {
+                    playClick();
+                    setSocialsOpen(v => !v);
+                }}
                 aria-expanded={socialsOpen}
                 aria-label="Connect with me"
                 className="w-full flex items-center min-h-[2.25rem] gap-2.5 rounded-md px-2 py-1.5 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors"
@@ -312,12 +436,30 @@ export default function UserSidebar({ active, children }) {
             {/* Mobile top bar + dropdown */}
             <div className="md:hidden relative shrink-0 z-40">
                 <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 relative z-10">
-                    <Link to="/" onClick={closeMobile} className="flex items-center gap-2">
-                        <img src={logo} alt="Logo" className="w-7 h-7 rounded-md object-cover" />
-                        <span className="text-lg font-semibold tracking-tight">{NAME}</span>
+                    <Link
+                        to="/"
+                        onMouseEnter={playHover}
+                        onClick={() => {
+                            playClick();
+                            closeMobile();
+                        }}
+                        className="flex items-center gap-2"
+                    >
+                        <img
+                            src={logo}
+                            alt="Logo"
+                            className="w-7 h-7 rounded-md object-cover"
+                        />
+                        <span className="text-lg font-semibold tracking-tight">
+                            {NAME}
+                        </span>
                     </Link>
                     <button
-                        onClick={() => setMobileOpen((v) => !v)}
+                        onMouseEnter={playHover}
+                        onClick={() => {
+                            playClick();
+                            setMobileOpen((v) => !v);
+                        }}
                         aria-label={mobileOpen ? "Close menu" : "Open menu"}
                         className="p-1 text-neutral-600 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white transition-colors"
                     >
@@ -346,19 +488,84 @@ export default function UserSidebar({ active, children }) {
             )}
 
             {/* Desktop sidebar */}
-            <aside className="hidden md:flex w-64 shrink-0 bg-white dark:bg-neutral-950 border-r border-neutral-200 dark:border-neutral-800 px-6 py-8 flex-col justify-between overflow-y-auto">
-                <div>
-                    <Link to="/" className="flex items-center gap-2 px-2 w-fit mb-8">
-                        <img src={logo} alt="Logo" className="w-7 h-7 rounded-md object-cover" />
-                        <span className="text-xl font-semibold tracking-tight">{NAME}</span>
+            <aside className="hidden md:flex w-64 shrink-0 flex-col border-r border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950">
+
+                {/* Header */}
+                <div className="border-b border-neutral-200 dark:border-neutral-800 px-6 py-6">
+                    <Link
+                        to="/"
+                        onMouseEnter={playHover}
+                        onClick={playClick}
+                        className="flex items-center gap-2 px-2 w-fit"
+                    >
+                        <img
+                            src={logo}
+                            alt="Logo"
+                            className="w-7 h-7 rounded-md object-cover"
+                        />
+                        <span className="text-xl font-semibold tracking-tight">
+                            {NAME}
+                        </span>
                     </Link>
+                </div>
+
+                {/* Navigation */}
+                <div className="flex-1 overflow-y-auto px-6 py-6">
                     <NavGroups />
                 </div>
-                <Footer />
+
+                {/* Footer */}
+                <div className="border-t border-neutral-200 dark:border-neutral-800 px-6 py-4">
+                    <Footer />
+                </div>
+
             </aside>
 
             {/* Main content — this is the ONLY scrolling container now */}
             <div className="flex flex-1 flex-col overflow-y-auto">{children}</div>
+
+            {resumeModalOpen && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+                    onClick={() => setResumeModalOpen(false)}
+                >
+                    <div
+                        className="w-full max-w-md rounded-xl border border-neutral-200 bg-white p-6 shadow-xl dark:border-neutral-800 dark:bg-neutral-900"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <h2 className="text-lg font-semibold">
+                            Download Resume
+                        </h2>
+
+                        <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+                            You're about to download the latest PDF version of my resume.
+                            Continue?
+                        </p>
+
+                        <div className="mt-6 flex justify-end gap-3">
+                            <button
+                                onClick={() => {
+                                    playClick();
+                                    setResumeModalOpen(false);
+                                }}
+                                className="rounded-md border border-neutral-200 px-4 py-2 text-sm hover:bg-neutral-50 dark:border-neutral-700 dark:hover:bg-neutral-800"
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                onClick={() => {
+                                    playClick();
+                                    downloadResume();
+                                }}
+                                className="rounded-md bg-neutral-950 px-4 py-2 text-sm text-white hover:bg-neutral-800 dark:bg-white dark:text-neutral-950"
+                            >
+                                Download Resume
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
