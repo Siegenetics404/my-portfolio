@@ -13,6 +13,8 @@ import {
     ArrowUpRight,
 } from "lucide-react";
 import logo from "../../assets/images/about/profile-logo.png";
+import cfLogo from "../../assets/images/logo/CF-logo.png";
+import cfLogoDark from "../../assets/images/logo/CF-logo-dark.png";
 import resumeFile from "../../assets/files/Cj Franco - Resume.pdf";
 import soundOn from "../../assets/sfx/sound-on.wav"
 import hoverSound from "../../assets/sfx/hover.mp3";
@@ -513,9 +515,14 @@ export default function UserSidebar() {
                         className="flex items-center gap-2"
                     >
                         <img
-                            src={logo}
-                            alt="Logo"
-                            className="w-7 h-7 rounded-md object-cover"
+                            src={cfLogo}
+                            alt="CF logo"
+                            className="w-7 h-7 rounded-md object-cover block dark:hidden"
+                        />
+                        <img
+                            src={cfLogoDark}
+                            alt="CF logo"
+                            className="w-7 h-7 rounded-md object-cover hidden dark:block"
                         />
                         <span className="text-lg font-semibold tracking-tight">
                             {NAME}
@@ -566,9 +573,14 @@ export default function UserSidebar() {
                         className="flex items-center gap-2 px-2 w-fit"
                     >
                         <img
-                            src={logo}
-                            alt="Logo"
-                            className="w-7 h-7 rounded-md object-cover"
+                            src={cfLogo}
+                            alt="CF logo"
+                            className="w-7 h-7 rounded-md object-cover block dark:hidden"
+                        />
+                        <img
+                            src={cfLogoDark}
+                            alt="CF logo"
+                            className="w-7 h-7 rounded-md object-cover hidden dark:block"
                         />
                         <span className="text-xl font-semibold tracking-tight">
                             {NAME}
