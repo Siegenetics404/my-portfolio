@@ -57,12 +57,11 @@ export default function Skills() {
                         {group.title}
                     </h2>
 
-                    {/* Pills */}
                     <div className="flex flex-wrap gap-2 mt-6">
                         {group.items.map((item) => (
                             <span
                                 key={item}
-                                className="text-xs text-neutral-600 dark:text-neutral-400 border border-neutral-400 dark:border-neutral-700 rounded-full px-3 py-1 hover:border-neutral-950 hover:text-neutral-950 dark:hover:border-white dark:hover:text-white transition-colors"
+                                className="text-xs text-neutral-600 dark:text-neutral-400 border border-neutral-400 dark:border-neutral-700 rounded-full px-3 py-1"
                             >
                                 {item}
                             </span>

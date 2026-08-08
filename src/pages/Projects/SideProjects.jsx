@@ -46,6 +46,10 @@ const SIDE_PROJECTS = [
     },
 ];
 
+// Same decisive curve used across the rest of the site (Projects.jsx,
+// ProjectCard.jsx, Testimonial.jsx, ThesisProject.jsx).
+const PREMIUM_EASE = "cubic-bezier(0.16,1,0.3,1)";
+
 export default function SideProjects() {
     return (
         <section className="mt-16">
@@ -54,21 +58,34 @@ export default function SideProjects() {
                 Other Projects
             </h2>
 
-            {/* 2x2 grid — image on top, description below, no logo/status/actions */}
+            {/* 2x2 grid — image on top, description below, no logo/status/actions.
+                No href or action here, so the hover stays a quiet visual
+                "acknowledgement" (image breathes a little) rather than a
+                strong lift/shadow that would wrongly imply these are clickable. */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
                 {SIDE_PROJECTS.map((project) => (
                     <div
                         key={project.title}
-                        className="border border-neutral-200 dark:border-neutral-800 rounded-lg overflow-hidden"
+                        style={{ transitionTimingFunction: PREMIUM_EASE }}
+                        className="group border border-neutral-200 dark:border-neutral-800 rounded-lg overflow-hidden transition-colors duration-500 hover:border-neutral-400 dark:hover:border-neutral-700"
                     >
                         {/* Image / fallback */}
-                        <div className="w-full h-40 bg-neutral-50 dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800">
+                        <div className="relative w-full h-40 overflow-hidden bg-neutral-50 dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800">
                             {project.image ? (
-                                <img
-                                    src={project.image}
-                                    alt={project.title}
-                                    className="w-full h-full object-cover"
-                                />
+                                <>
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        loading="lazy"
+                                        style={{ transitionTimingFunction: PREMIUM_EASE }}
+                                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.05]"
+                                    />
+                                    <div
+                                        aria-hidden="true"
+                                        style={{ transitionTimingFunction: PREMIUM_EASE }}
+                                        className="pointer-events-none absolute inset-0 -translate-x-[120%] group-hover:translate-x-[120%] bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-20deg] transition-transform duration-700 dark:via-white/10"
+                                    />
+                                </>
                             ) : (
                                 <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-neutral-300 dark:text-neutral-700">
                                     <ImageOff size={20} />

@@ -2,9 +2,6 @@ import ProjectCard from "./ProjectCard";
 import SideProjects from "./SideProjects";
 import ThesisProject from "./ThesisProject";
 
-// No more `<UserSidebar>` wrapper here — App.jsx now nests this page
-// inside the UserSidebar layout route, which renders it through its
-// <Outlet />. This component only returns its own content.
 export default function Index() {
     return (
         <main className="flex-1 overflow-y-auto bg-white dark:bg-neutral-950 px-5 py-8 sm:px-10 sm:py-10 md:px-16 md:py-14 relative">

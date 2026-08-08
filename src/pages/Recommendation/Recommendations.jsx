@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import { Play, X } from "lucide-react";
 import ethanAvatar from "../../assets/images/reference/Ethan.webp";
 import tomAvatar from "../../assets/images/reference/Tom.webp";
@@ -24,7 +25,13 @@ const RECOMMENDATIONS = [
     },
 ];
 
+// Same decisive curve used across the rest of the site (Projects.jsx,
+// ProjectCard.jsx, Testimonial.jsx, ThesisProject.jsx).
+const PREMIUM_EASE = "cubic-bezier(0.16,1,0.3,1)";
+
 export default function Recommendations() {
+    const { playHover, playClick } = useOutletContext();
+
     const [activeVideo, setActiveVideo] = useState(null);
 
     return (
@@ -35,7 +42,11 @@ export default function Recommendations() {
                 Recommendations
             </h2>
 
-            {/* Quote-first cards */}
+            {/* Quote-first cards — the card itself isn't a click target here
+                (unlike the homepage Testimonial.jsx teaser, which is a whole
+                <button>), so it keeps a static border and no sfx. Only
+                "Watch video" is interactive, so that's the one thing that
+                gets hover motion and sound. */}
             <div className="flex flex-col gap-4 mt-8">
                 {RECOMMENDATIONS.map((r) => (
                     <div
@@ -72,10 +83,20 @@ export default function Recommendations() {
                             {r.video && (
                                 <button
                                     type="button"
-                                    onClick={() => setActiveVideo(r)}
-                                    className="flex items-center gap-1.5 text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors"
+                                    onMouseEnter={playHover}
+                                    onClick={() => {
+                                        playClick();
+                                        setActiveVideo(r);
+                                    }}
+                                    style={{ transitionTimingFunction: PREMIUM_EASE }}
+                                    className="group/play inline-flex items-center gap-2 rounded-full border border-neutral-300 dark:border-neutral-700 pl-1.5 pr-4 py-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 transition-colors duration-300 hover:border-neutral-950 hover:text-neutral-950 dark:hover:border-white dark:hover:text-white"
                                 >
-                                    <Play size={12} fill="currentColor" />
+                                    <span
+                                        style={{ transitionTimingFunction: PREMIUM_EASE }}
+                                        className="flex items-center justify-center w-6 h-6 rounded-full bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 transition-transform duration-500 group-hover/play:scale-110"
+                                    >
+                                        <Play size={10} fill="currentColor" className="ml-0.5" />
+                                    </span>
                                     Watch video
                                 </button>
                             )}
@@ -84,10 +105,10 @@ export default function Recommendations() {
                 ))}
             </div>
 
-            {/* Video modal — already dark, unchanged */}
+            {/* Video modal */}
             {activeVideo && (
                 <div
-                    className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-6"
+                    className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-6"
                     onClick={() => setActiveVideo(null)}
                 >
                     <div
@@ -95,11 +116,20 @@ export default function Recommendations() {
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
-                            onClick={() => setActiveVideo(null)}
+                            onMouseEnter={playHover}
+                            onClick={() => {
+                                playClick();
+                                setActiveVideo(null);
+                            }}
                             aria-label="Close video"
-                            className="absolute -top-10 right-0 text-white/70 hover:text-white transition-colors"
+                            style={{ transitionTimingFunction: PREMIUM_EASE }}
+                            className="group/close absolute -top-10 right-0 text-white/70 hover:text-white transition-colors duration-300"
                         >
-                            <X size={22} />
+                            <X
+                                size={22}
+                                style={{ transitionTimingFunction: PREMIUM_EASE }}
+                                className="transition-transform duration-500 group-hover/close:rotate-90"
+                            />
                         </button>
 
                         <video
