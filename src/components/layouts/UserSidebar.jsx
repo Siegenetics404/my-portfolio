@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
     Download,
@@ -114,9 +114,9 @@ export default function UserSidebar({ active, children }) {
     const footerRef = React.useRef(null);
     const closeMobile = () => setMobileOpen(false);
     const [resumeModalOpen, setResumeModalOpen] = useState(false);
+
+    // The "sound on" confirmation chime.
     const soundAudio = React.useRef(new Audio(soundOn));
-    const hoverAudio = React.useRef(new Audio(hoverSound));
-    const clickAudio = React.useRef(new Audio(clickSound));
 
     const [soundEnabled, setSoundEnabled] = useState(() => {
         return localStorage.getItem("sound-enabled") !== "false";
@@ -129,44 +129,72 @@ export default function UserSidebar({ active, children }) {
     useEffect(() => {
         soundAudio.current.volume = 0.5;
         soundAudio.current.preload = "auto";
-
-        hoverAudio.current.volume = 0.25;
-        hoverAudio.current.preload = "auto";
-
-        clickAudio.current.volume = 0.35;
-        clickAudio.current.preload = "auto";
     }, []);
+
+    // ── Hover / click sound engine ───────────────────────────────────────
+    //
+    // Kept deliberately simple: a couple of plain, pre-created <audio>
+    // elements per sound, reused directly (no cloneNode, no re-fetching,
+    // no AudioContext, no "unlock" listener). A .play() call made
+    // directly inside a real onClick handler is always allowed by the
+    // browser — no unlock trick is actually needed for it. An earlier
+    // version of this added one anyway, and it backfired: it called
+    // .pause() on the same pooled element a moment after a real click had
+    // just started playing it, muting the very sound the click was
+    // supposed to make. That's gone now.
+    //
+    // Hovering before any click on the page can still be silent the very
+    // first time — that's normal browser behavior for non-click-triggered
+    // audio, not a bug — but clicking plays immediately, every time.
+    const POOL_SIZE = 2;
+
+    const hoverPoolRef = useRef([]);
+    const clickPoolRef = useRef([]);
+    const hoverIndexRef = useRef(0);
+    const clickIndexRef = useRef(0);
+
+    useEffect(() => {
+        hoverPoolRef.current = Array.from({ length: POOL_SIZE }, () => {
+            const audio = new Audio(hoverSound);
+            audio.volume = 0.25;
+            audio.preload = "auto";
+            return audio;
+        });
+        clickPoolRef.current = Array.from({ length: POOL_SIZE }, () => {
+            const audio = new Audio(clickSound);
+            audio.volume = 0.35;
+            audio.preload = "auto";
+            return audio;
+        });
+    }, []);
+
+    const playFromPool = (poolRef, indexRef, label) => {
+        if (!soundEnabled) return;
+        const pool = poolRef.current;
+        if (!pool.length) return;
+
+        const audio = pool[indexRef.current];
+        indexRef.current = (indexRef.current + 1) % pool.length;
+
+        audio.currentTime = 0;
+        audio.play().catch((err) => {
+            // If this still doesn't sound, open devtools and check what
+            // prints here — that's the real reason, not a guess.
+            console.error(`[sound] ${label} play failed:`, err.name, err.message);
+        });
+    };
+
+    const playHover = () => playFromPool(hoverPoolRef, hoverIndexRef, "hover");
+    const playClick = () => playFromPool(clickPoolRef, clickIndexRef, "click");
 
     const playSound = () => {
         if (!soundEnabled) return;
 
         soundAudio.current.pause();
         soundAudio.current.currentTime = 0;
-        soundAudio.current.play().catch(() => { });
-    };
-
-    // const playHover = () => {
-    //     if (!soundEnabled) return;
-
-    //     hoverAudio.current.pause();
-    //     hoverAudio.current.currentTime = 0;
-    //     hoverAudio.current.play().catch(() => { });
-    // };
-
-    const playHover = () => {
-        if (!soundEnabled) return;
-
-        const audio = hoverAudio.current.cloneNode();
-        audio.volume = hoverAudio.current.volume;
-        audio.play().catch(() => { });
-    };
-
-    const playClick = () => {
-        if (!soundEnabled) return;
-
-        const audio = clickAudio.current.cloneNode();
-        audio.volume = clickAudio.current.volume;
-        audio.play().catch(() => { });
+        soundAudio.current.play().catch((err) => {
+            console.error("[sound] chime play failed:", err.name, err.message);
+        });
     };
 
     const downloadResume = () => {
