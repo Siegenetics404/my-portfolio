@@ -1,5 +1,4 @@
-import UserSidebar from "../../components/layouts/UserSidebar";
-
+import { useOutletContext } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import Stats from "./Stats";
 import Projects from "./Projects";
@@ -66,73 +65,93 @@ const SOCIALS = [
     }
 ];
 
+const PREMIUM_EASE = "cubic-bezier(0.16,1,0.3,1)";
+
 export default function Home() {
+    const { playHover, playClick } = useOutletContext();
+
     return (
-        <UserSidebar active="home">
-            <main className="flex-1 overflow-y-auto bg-white dark:bg-neutral-950 px-5 py-8 sm:px-10 sm:py-10 md:px-16 md:py-14">
-                <div className="max-w-3xl mx-auto">
-                    <div className="flex flex-col md:flex-row md:items-stretch gap-6 md:gap-8 w-full">
-                        {/* Profile image — mouse-trail hover reveal effect */}
-                        <ProfileImage />
+        <main className="flex-1 overflow-y-auto bg-white dark:bg-neutral-950 px-5 py-8 sm:px-10 sm:py-10 md:px-16 md:py-14">
+            <div className="max-w-3xl mx-auto">
+                <div className="flex flex-col md:flex-row md:items-stretch gap-6 md:gap-8 w-full">
+                    {/* Profile image — mouse-trail hover reveal effect */}
+                    <ProfileImage />
 
-                        <div className="flex flex-col gap-3 min-w-0">
-                            <div className="flex items-center gap-3 flex-wrap">
-                                <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-950 dark:text-white">
-                                    CJ Franco
-                                </h1>
-                                {["Frontend", "Backend", "Automation", "SEO"].map((tag) => (
-                                    <span
-                                        key={tag}
-                                        className="text-xs text-neutral-500 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 rounded-full px-3 py-1"
-                                    >
-                                        {tag}
+                    <div className="flex flex-col gap-3 min-w-0">
+                        <div className="flex items-center gap-3 flex-wrap">
+                            <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-950 dark:text-white">
+                                CJ Franco
+                            </h1>
+                            {["Frontend", "Backend", "Automation", "SEO"].map((tag) => (
+                                <span
+                                    key={tag}
+                                    className="text-xs text-neutral-500 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 rounded-full px-3 py-1"
+                                >
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+
+                        <div className="flex flex-col gap-3">
+                            <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                                I'm a web developer based in the Philippines, focused on building
+                                clean, functional interfaces. I enjoy turning ideas into simple,
+                                well-crafted products from front to back.
+                            </p>
+                            <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                                Over the past few years I've gained experience through a
+                                government internship, a startup, and freelance projects. I've
+                                built everything from marketing sites and SEO-driven landing
+                                pages to full-stack web applications, and I care about clean
+                                code, thoughtful design, and shipping things that actually work.
+                            </p>
+                        </div>
+
+                        {/* Socials */}
+                        <div className="flex items-center justify-between flex-wrap gap-y-3 pt-1">
+                            {SOCIALS.map(({ icon: Icon, label, href }) => (
+                                <a key={label}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onMouseEnter={playHover}
+                                    onClick={playClick}
+                                    className="group flex items-center gap-2 w-fit text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors duration-300"
+                                >
+                                    <Icon size={16} />
+                                    <span>{label}</span>
+
+                                    {/* Double-arrow hover: the resting arrow slides up-and-out
+                                        while a duplicate slides in from the opposite corner to
+                                        take its place — reads as a deliberate flourish rather
+                                        than a plain icon nudge. */}
+                                    <span className="relative inline-flex items-center justify-center w-3 h-3 overflow-hidden shrink-0">
+                                        <ArrowUpRight
+                                            size={12}
+                                            className="absolute transition-all duration-500 group-hover:translate-x-3 group-hover:-translate-y-3 group-hover:opacity-0"
+                                            style={{ transitionTimingFunction: PREMIUM_EASE }}
+                                        />
+                                        <ArrowUpRight
+                                            size={12}
+                                            aria-hidden="true"
+                                            className="absolute -translate-x-3 translate-y-3 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100"
+                                            style={{ transitionTimingFunction: PREMIUM_EASE }}
+                                        />
                                     </span>
-                                ))}
-                            </div>
-
-                            <div className="flex flex-col gap-3">
-                                <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                                    I'm a web developer based in the Philippines, focused on building
-                                    clean, functional interfaces. I enjoy turning ideas into simple,
-                                    well-crafted products from front to back.
-                                </p>
-                                <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                                    Over the past few years I've gained experience through a
-                                    government internship, a startup, and freelance projects. I've
-                                    built everything from marketing sites and SEO-driven landing
-                                    pages to full-stack web applications, and I care about clean
-                                    code, thoughtful design, and shipping things that actually work.
-                                </p>
-                            </div>
-
-                            {/* Socials */}
-                            <div className="flex items-center justify-between flex-wrap gap-y-3 pt-1">
-                                {SOCIALS.map(({ icon: Icon, label, href }) => (
-
-                                    <a key={label}
-                                        href={href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center gap-2 w-fit text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors"
-                                    >
-                                        <Icon size={16} />
-                                        <span>{label}</span>
-                                        <ArrowUpRight size={12} />
-                                    </a>
-                                ))}
-                            </div>
+                                </a>
+                            ))}
                         </div>
                     </div>
-
-                    {/* Stats */}
-                    <Stats />
-                    <Projects />
-                    <Experience />
-                    <TechStack />
-                    <Testimonial />
-                    <Github />
                 </div>
-            </main>
-        </UserSidebar>
+
+                {/* Stats */}
+                <Stats />
+                <Projects />
+                <Experience />
+                <TechStack />
+                <Testimonial />
+                <Github />
+            </div>
+        </main>
     );
 }

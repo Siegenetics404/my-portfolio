@@ -1,6 +1,11 @@
+import { useOutletContext } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
+const PREMIUM_EASE = "cubic-bezier(0.16,1,0.3,1)";
+
 export default function Github() {
+    const { playHover, playClick } = useOutletContext();
+
     return (
         <section className="mt-12 sm:mt-16 max-w-3xl">
             {/* Section title */}
@@ -10,18 +15,23 @@ export default function Github() {
                     GitHub
                 </h2>
 
-
-                <a href="https://github.com/Siegenetics404"
+                <a
+                    href="https://github.com/Siegenetics404"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors"
+                    onMouseEnter={playHover}
+                    onClick={playClick}
+                    className="group inline-flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors duration-300"
                 >
                     @Siegenetics404
-                    <ArrowRight size={10} />
+                    <ArrowRight
+                        size={10}
+                        className="transition-transform duration-500 group-hover:translate-x-1"
+                        style={{ transitionTimingFunction: PREMIUM_EASE }}
+                    />
                 </a>
             </div>
 
-            {/* Contribution board — scrolls horizontally on narrow screens since the graph has a min-width */}
             <div className="mt-6 sm:mt-8 border border-neutral-200 dark:border-neutral-800 rounded-lg p-3 sm:p-5 overflow-x-auto">
                 <img
                     src="https://ghchart.rshah.org/000000/Siegenetics404"
@@ -29,6 +39,6 @@ export default function Github() {
                     className="w-full min-w-[600px] dark:invert dark:hue-rotate-180"
                 />
             </div>
-        </section >
+        </section>
     );
 }

@@ -1,3 +1,4 @@
+import { Link, useOutletContext } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 const EXPERIENCE = [
@@ -18,7 +19,11 @@ const EXPERIENCE = [
   },
 ];
 
+const PREMIUM_EASE = "cubic-bezier(0.16,1,0.3,1)";
+
 export default function Experience() {
+  const { playHover, playClick } = useOutletContext();
+
   return (
     <section className="mt-12 sm:mt-16 max-w-3xl">
       {/* Section title */}
@@ -28,16 +33,23 @@ export default function Experience() {
           Experience
         </h2>
 
-
-        <a href="/experience"
-          className="flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors"
+        <Link
+          to="/experience"
+          onMouseEnter={playHover}
+          onClick={playClick}
+          className="group inline-flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors duration-300"
         >
           Full Story
-          <ArrowRight size={10} />
-        </a>
+          <ArrowRight
+            size={10}
+            className="transition-transform duration-500 group-hover:translate-x-1"
+            style={{ transitionTimingFunction: PREMIUM_EASE }}
+          />
+        </Link>
       </div>
 
-      {/* Timeline list */}
+      {/* Timeline list — plain, non-interactive rows. No sfx, no hover
+          state here; they're not buttons or links. */}
       <ul className="mt-6 sm:mt-8">
         {EXPERIENCE.map((item, i) => (
           <li
@@ -55,6 +67,6 @@ export default function Experience() {
           </li>
         ))}
       </ul>
-    </section >
+    </section>
   );
 }

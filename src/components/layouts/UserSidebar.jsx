@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import {
     Download,
     Menu,
@@ -17,6 +17,7 @@ import resumeFile from "../../assets/files/Cj Franco - Resume.pdf";
 import soundOn from "../../assets/sfx/sound-on.wav"
 import hoverSound from "../../assets/sfx/hover.mp3";
 import clickSound from "../../assets/sfx/click.mp3";
+import errorSound from "../../assets/sfx/error.wav";
 
 // Inline icons — brand marks like GitHub/Instagram aren't in lucide-react's
 // core set, so they're defined here instead of imported.
@@ -107,7 +108,21 @@ const MODES = [
 const NAME = "CJ Franco";
 const EMAIL = "franco.cj03@gmail.com";
 
-export default function UserSidebar({ active, children }) {
+// Same decisive, high-polish curve used elsewhere (Projects.jsx,
+// Home/Index.jsx) — kept identical so hover motion feels like one
+// consistent system across the whole site.
+const PREMIUM_EASE = "cubic-bezier(0.16,1,0.3,1)";
+
+export default function UserSidebar() {
+    const location = useLocation();
+
+    // Derived from the URL instead of a manually-passed prop, so pages
+    // never need to say `active="home"` — this stays correct automatically
+    // as routes are added or renamed.
+    const active = NAV_GROUPS
+        .flatMap((group) => group.items)
+        .find((item) => item.path === location.pathname)?.id;
+
     const [mobileOpen, setMobileOpen] = useState(false);
     const [mode, setMode] = useState(() => localStorage.getItem("theme-mode") || "system");
     const [socialsOpen, setSocialsOpen] = useState(false);
@@ -150,8 +165,10 @@ export default function UserSidebar({ active, children }) {
 
     const hoverPoolRef = useRef([]);
     const clickPoolRef = useRef([]);
+    const errorPoolRef = useRef([]);
     const hoverIndexRef = useRef(0);
     const clickIndexRef = useRef(0);
+    const errorIndexRef = useRef(0);
 
     useEffect(() => {
         hoverPoolRef.current = Array.from({ length: POOL_SIZE }, () => {
@@ -162,6 +179,12 @@ export default function UserSidebar({ active, children }) {
         });
         clickPoolRef.current = Array.from({ length: POOL_SIZE }, () => {
             const audio = new Audio(clickSound);
+            audio.volume = 0.35;
+            audio.preload = "auto";
+            return audio;
+        });
+        errorPoolRef.current = Array.from({ length: POOL_SIZE }, () => {
+            const audio = new Audio(errorSound);
             audio.volume = 0.35;
             audio.preload = "auto";
             return audio;
@@ -186,6 +209,7 @@ export default function UserSidebar({ active, children }) {
 
     const playHover = () => playFromPool(hoverPoolRef, hoverIndexRef, "hover");
     const playClick = () => playFromPool(clickPoolRef, clickIndexRef, "click");
+    const playError = () => playFromPool(errorPoolRef, errorIndexRef, "error");
 
     const playSound = () => {
         if (!soundEnabled) return;
@@ -416,13 +440,28 @@ export default function UserSidebar({ active, children }) {
                                     setSocialsOpen(false);
                                     closeMobile();
                                 }}
-                                className="flex items-center justify-between gap-2 px-3 py-1.5 text-sm text-neutral-600 hover:text-neutral-950 hover:bg-neutral-50 dark:text-neutral-400 dark:hover:text-white dark:hover:bg-neutral-800/60 transition-colors"
+                                className="group flex items-center justify-between gap-2 px-3 py-1.5 text-sm text-neutral-600 hover:text-neutral-950 hover:bg-neutral-50 dark:text-neutral-400 dark:hover:text-white dark:hover:bg-neutral-800/60 transition-colors"
                             >
                                 <span className="flex items-center gap-2">
                                     <Icon size={15} />
                                     {label}
                                 </span>
-                                <ArrowUpRight size={12} className="opacity-50" />
+
+                                {/* Double-arrow hover — matches the flourish used on
+                                    the social links in Home/Index.jsx. */}
+                                <span className="relative inline-flex items-center justify-center w-3 h-3 overflow-hidden shrink-0">
+                                    <ArrowUpRight
+                                        size={12}
+                                        className="absolute opacity-50 transition-all duration-500 group-hover:translate-x-3 group-hover:-translate-y-3 group-hover:opacity-0"
+                                        style={{ transitionTimingFunction: PREMIUM_EASE }}
+                                    />
+                                    <ArrowUpRight
+                                        size={12}
+                                        aria-hidden="true"
+                                        className="absolute -translate-x-3 translate-y-3 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100"
+                                        style={{ transitionTimingFunction: PREMIUM_EASE }}
+                                    />
+                                </span>
                             </a>
                         </li>
                     ))}
@@ -550,7 +589,9 @@ export default function UserSidebar({ active, children }) {
             </aside>
 
             {/* Main content — this is the ONLY scrolling container now */}
-            <div className="flex flex-1 flex-col overflow-y-auto">{children}</div>
+            <div className="flex flex-1 flex-col overflow-y-auto">
+                <Outlet context={{ playHover, playClick, playError, soundEnabled }} />
+            </div>
 
             {resumeModalOpen && (
                 <div

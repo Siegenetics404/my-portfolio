@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useOutletContext } from "react-router-dom";
 import { ArrowRight, X } from "lucide-react";
 import ethanAvatar from "../../assets/images/reference/Ethan.webp";
 import tomAvatar from "../../assets/images/reference/Tom.webp";
@@ -25,7 +26,10 @@ const TESTIMONIALS = [
 
 ];
 
+const PREMIUM_EASE = "cubic-bezier(0.16,1,0.3,1)";
+
 export default function Testimonial() {
+    const { playHover, playClick } = useOutletContext();
     const [activeVideo, setActiveVideo] = useState(null);
 
     return (
@@ -37,29 +41,44 @@ export default function Testimonial() {
                     Recommendations
                 </h2>
 
-
-                <a href="/recommendation"
-                    className="flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors"
+                <Link
+                    to="/recommendation"
+                    onMouseEnter={playHover}
+                    onClick={playClick}
+                    className="group inline-flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors duration-300"
                 >
                     Full Testimonial
-                    <ArrowRight size={10} />
-                </a>
+                    <ArrowRight
+                        size={10}
+                        className="transition-transform duration-500 group-hover:translate-x-1"
+                        style={{ transitionTimingFunction: PREMIUM_EASE }}
+                    />
+                </Link>
             </div>
 
-            {/* Testimonial cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
                 {TESTIMONIALS.map((t) => (
                     <button
                         key={t.name}
                         type="button"
-                        onClick={() => setActiveVideo(t)}
-                        className="relative flex flex-col justify-between border border-neutral-200 dark:border-neutral-800 rounded-lg p-5 overflow-hidden text-left hover:border-neutral-950 dark:hover:border-neutral-600 transition-colors"
+                        onMouseEnter={playHover}
+                        onClick={() => {
+                            playClick();
+                            setActiveVideo(t);
+                        }}
+                        style={{ transitionTimingFunction: PREMIUM_EASE }}
+                        className="group relative flex flex-col justify-between rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 overflow-hidden text-left
+                            transition-[transform,box-shadow,border-color] duration-500 will-change-transform
+                            hover:-translate-y-1 hover:shadow-xl hover:shadow-neutral-950/10 dark:hover:shadow-black/50
+                            hover:border-neutral-950 dark:hover:border-neutral-600
+                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 dark:focus-visible:ring-white focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-950"
                     >
                         <svg
                             width="64"
                             height="64"
                             viewBox="0 0 24 24"
-                            className="absolute -top-3 -right-2 text-orange-200/50 dark:text-orange-900/40"
+                            style={{ transitionTimingFunction: PREMIUM_EASE }}
+                            className="absolute -top-3 -right-2 text-orange-200/50 dark:text-orange-900/40 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3"
                             fill="currentColor"
                         >
                             <path d="M9.5 8C7 8 5 10 5 12.5c0 2.2 1.6 4 3.7 4.4-.3 1.4-1.4 2.5-2.7 3.1v1.5c2.8-.5 5.5-2.6 5.5-6.5V13c0-2.8-1-5-2-5Zm9 0c-2.5 0-4.5 2-4.5 4.5 0 2.2 1.6 4 3.7 4.4-.3 1.4-1.4 2.5-2.7 3.1v1.5c2.8-.5 5.5-2.6 5.5-6.5V13c0-2.8-1-5-2-5Z" />
@@ -73,7 +92,8 @@ export default function Testimonial() {
                             <img
                                 src={t.avatar}
                                 alt={t.name}
-                                className="w-9 h-9 rounded-full object-cover border border-neutral-200 dark:border-neutral-800 shrink-0"
+                                style={{ transitionTimingFunction: PREMIUM_EASE }}
+                                className="w-9 h-9 rounded-full object-cover border border-neutral-200 dark:border-neutral-800 shrink-0 transition-transform duration-500 group-hover:scale-110"
                             />
                             <div>
                                 <p className="text-sm font-medium text-neutral-950 dark:text-white">{t.name}</p>
@@ -84,7 +104,6 @@ export default function Testimonial() {
                 ))}
             </div>
 
-            {/* Video modal — already dark, unchanged */}
             {
                 activeVideo && (
                     <div
@@ -96,7 +115,11 @@ export default function Testimonial() {
                             onClick={(e) => e.stopPropagation()}
                         >
                             <button
-                                onClick={() => setActiveVideo(null)}
+                                onMouseEnter={playHover}
+                                onClick={() => {
+                                    playClick();
+                                    setActiveVideo(null);
+                                }}
                                 aria-label="Close video"
                                 className="absolute -top-10 right-0 text-white/70 hover:text-white transition-colors"
                             >
