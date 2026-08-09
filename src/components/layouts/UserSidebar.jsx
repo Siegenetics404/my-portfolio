@@ -21,8 +21,7 @@ import hoverSound from "../../assets/sfx/hover.mp3";
 import clickSound from "../../assets/sfx/click.mp3";
 import errorSound from "../../assets/sfx/error.wav";
 
-// Inline icons — brand marks like GitHub/Instagram aren't in lucide-react's
-// core set, so they're defined here instead of imported.
+
 function GithubIcon({ size = 16 }) {
     return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
