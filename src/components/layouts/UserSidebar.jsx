@@ -21,7 +21,6 @@ import hoverSound from "../../assets/sfx/hover.mp3";
 import clickSound from "../../assets/sfx/click.mp3";
 import errorSound from "../../assets/sfx/error.wav";
 
-
 function GithubIcon({ size = 16 }) {
     return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
